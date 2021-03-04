@@ -9,11 +9,11 @@ public abstract class Node
     public delegate NodeStates NodeReturn();
 
     /* The current state of the node */
-    protected NodeStates m_nodeStates;
+    protected NodeStates m_nodeState;
 
     public NodeStates nodeState
     {
-        get { return m_nodeStates; }
+        get { return m_nodeState; }
     }
 
     /* The constructor of the node */
