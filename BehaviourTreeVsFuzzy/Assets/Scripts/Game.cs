@@ -6,7 +6,7 @@ public class Game : MonoBehaviour {
     [SerializeField]
     private PlayerController playerController;
     [SerializeField]
-    private EnemyBehaviourTree enemyBehaviourTree;
+    private EnemyBehaviorTree enemyBehaviorTree;
     [SerializeField]
     private Player humanPlayer;
     [SerializeField]
@@ -15,22 +15,18 @@ public class Game : MonoBehaviour {
     private UIController uiController;
     private int turn = 0;
 
-    private void Awake()
-    {
-        enemyBehaviourTree.SetPlayerData(humanPlayer, aiPlayer);
-        enemyBehaviourTree.onTreeExectuted += EndTurn;
+    private void Awake() {
+        enemyBehaviorTree.SetPlayerData(humanPlayer, aiPlayer);
+        enemyBehaviorTree.onTreeExecuted += EndTurn;
         playerController.onActionExecuted += EndTurn;
     }
 
-    public void EvaluateAITree()
-    {
-        enemyBehaviourTree.Evaluate();
+    public void EvaluateAITree() {
+        enemyBehaviorTree.Evaluate();        
     }
 
-    private void EndTurn()
-    {
-        if(humanPlayer.CurrentHealth <= 0 || aiPlayer.CurrentHealth <=0)
-        {
+    private void EndTurn() {
+        if(humanPlayer.CurrentHealth <= 0 || aiPlayer.CurrentHealth <= 0) {
             stateMachine.SetTrigger("EndGame");
             uiController.EndGame();
             return;
