@@ -41,6 +41,6 @@ public class UIController : MonoBehaviour {
 
     /* We disable/enable the player controls based on whose turn it is currently */
     private void SetPlayerControlState(bool active) {
-        playerControls.SetActive(active);
+       // playerControls.SetActive(active);
     }
 }

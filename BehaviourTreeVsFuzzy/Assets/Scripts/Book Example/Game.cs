@@ -21,8 +21,9 @@ public class Game : MonoBehaviour {
         playerController.onActionExecuted += EndTurn;
     }
 
-    public void EvaluateAITree() {
-        enemyBehaviorTree.Evaluate();        
+    public void EvaluateAITree()
+    {
+        enemyBehaviorTree.Evaluate();
     }
 
     private void EndTurn() {
