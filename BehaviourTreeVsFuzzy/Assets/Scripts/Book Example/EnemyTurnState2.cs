@@ -2,12 +2,23 @@
 
 public class EnemyTurnState2 : StateMachineBehaviour
 {
+    [SerializeField]
+    private string EnemyNumber;
+    [SerializeField]
+    private int AINumber;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log("********************* \n Strating the Second enemy's turn!");
-        animator.gameObject.GetComponent<NewGame>().EvaluateAITree2();
+        Debug.Log("********************* \n Strating the" + EnemyNumber + " enemy's turn!");
+        if(AINumber==1)
+        {
+            animator.gameObject.GetComponent<NewGame>().EvaluateAITree();
+        }
+        else
+        {
+            animator.gameObject.GetComponent<NewGame>().EvaluateAITree2();
+        }
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -18,7 +29,7 @@ public class EnemyTurnState2 : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log("Ending the Second enemy's turn. \n *********************");
+        Debug.Log("Ending the " + EnemyNumber + " enemy's turn. \n *********************");
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here
