@@ -18,8 +18,11 @@ public class UIController : MonoBehaviour {
     private Text enemyHealthText;
     [SerializeField]
     private GameObject playerControls;
+    [SerializeField]
+    private bool HumanPlayer;
 
-    private void FixedUpdate() {
+    private void FixedUpdate()
+    {
         playerHealthText.text = "Hit points " + humanPlayer.CurrentHealth.ToString();
         enemyHealthText.text = "Hit points " + aiPlayer.CurrentHealth.ToString();
     }
@@ -41,6 +44,13 @@ public class UIController : MonoBehaviour {
 
     /* We disable/enable the player controls based on whose turn it is currently */
     private void SetPlayerControlState(bool active) {
-       // playerControls.SetActive(active);
+        if (humanPlayer == true)
+        {
+            playerControls.SetActive(active);
+        }
+        else
+        {
+            playerControls.SetActive(false);
+        }
     }
 }
