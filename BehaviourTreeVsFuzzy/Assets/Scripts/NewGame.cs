@@ -5,13 +5,13 @@ public class NewGame : MonoBehaviour
     [SerializeField]
     private Animator stateMachine;
     [SerializeField]
-    private EnemyBehaviorTree enemyBehaviorTreeFar;
+    private UpdatedEnemyBehaviorTree enemyBehaviorTreeFar;
     [SerializeField]
-    private EnemyBehaviorTree enemyBehaviorTreeNear;
+    private UpdatedEnemyBehaviorTree enemyBehaviorTreeNear;
     [SerializeField]
-    private Player humanPlayer;
+    private NewPlayer humanPlayer;
     [SerializeField]
-    private Player aiPlayer;
+    private NewPlayer aiPlayer;
     [SerializeField]
     private UIController uiController;
     private int turn = 0;
