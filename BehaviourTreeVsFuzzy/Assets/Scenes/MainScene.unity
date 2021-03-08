@@ -611,6 +611,38 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 973426253}
   m_CullTransparentMesh: 0
+--- !u!1 &997480104 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1163717998735638, guid: 04725db679e5441458e62215d6891d1a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1072334783}
+--- !u!114 &997480107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 997480104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a5e89242a4e459408d91953d3d0aaf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1024686314 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1855605371942674, guid: 04725db679e5441458e62215d6891d1a,
+    type: 2}
+  m_PrefabInternal: {fileID: 1072334783}
+--- !u!114 &1024686317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1024686314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a5e89242a4e459408d91953d3d0aaf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1062744963 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1566490285154934, guid: 04725db679e5441458e62215d6891d1a,
@@ -664,7 +696,19 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114100625325627782, guid: 04725db679e5441458e62215d6891d1a,
+        type: 2}
+      propertyPath: enemyBehaviorTreeNear
+      value: 
+      objectReference: {fileID: 997480107}
+    - target: {fileID: 114100625325627782, guid: 04725db679e5441458e62215d6891d1a,
+        type: 2}
+      propertyPath: enemyBehaviorTreeFar
+      value: 
+      objectReference: {fileID: 1024686317}
+    m_RemovedComponents:
+    - {fileID: 114895398289663852, guid: 04725db679e5441458e62215d6891d1a, type: 2}
+    - {fileID: 114003550936491666, guid: 04725db679e5441458e62215d6891d1a, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 04725db679e5441458e62215d6891d1a, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &1237668965
