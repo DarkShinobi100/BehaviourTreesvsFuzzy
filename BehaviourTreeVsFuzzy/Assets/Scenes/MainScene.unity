@@ -616,6 +616,28 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1163717998735638, guid: 04725db679e5441458e62215d6891d1a,
     type: 2}
   m_PrefabInternal: {fileID: 1072334783}
+--- !u!114 &997480105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 997480104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e89c1ae6c9ba75c48b8bf1a34297826c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 20
+  currentHealth: 0
+  maxMana: 20
+  currentMana: 0
+  AttackValue: 0
+  DefenceValue: 0
+  MagicAttackValue: 0
+  lowHealthThreshold: 7
+  lowManaThreshold: 5
+  lowDefenceThreshold: 3
+  lowAttackThreshold: 2
 --- !u!114 &997480107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -632,6 +654,28 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1855605371942674, guid: 04725db679e5441458e62215d6891d1a,
     type: 2}
   m_PrefabInternal: {fileID: 1072334783}
+--- !u!114 &1024686315
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1024686314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e89c1ae6c9ba75c48b8bf1a34297826c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 20
+  currentHealth: 0
+  maxMana: 20
+  currentMana: 0
+  AttackValue: 0
+  DefenceValue: 0
+  MagicAttackValue: 0
+  lowHealthThreshold: 7
+  lowManaThreshold: 5
+  lowDefenceThreshold: 3
+  lowAttackThreshold: 2
 --- !u!114 &1024686317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,9 +750,31 @@ Prefab:
       propertyPath: enemyBehaviorTreeFar
       value: 
       objectReference: {fileID: 1024686317}
+    - target: {fileID: 114100625325627782, guid: 04725db679e5441458e62215d6891d1a,
+        type: 2}
+      propertyPath: aiPlayer
+      value: 
+      objectReference: {fileID: 1024686315}
+    - target: {fileID: 114100625325627782, guid: 04725db679e5441458e62215d6891d1a,
+        type: 2}
+      propertyPath: humanPlayer
+      value: 
+      objectReference: {fileID: 997480105}
+    - target: {fileID: 114755466386510572, guid: 04725db679e5441458e62215d6891d1a,
+        type: 2}
+      propertyPath: NewAiPlayer
+      value: 
+      objectReference: {fileID: 1024686315}
+    - target: {fileID: 114755466386510572, guid: 04725db679e5441458e62215d6891d1a,
+        type: 2}
+      propertyPath: NewHumanPlayer
+      value: 
+      objectReference: {fileID: 997480105}
     m_RemovedComponents:
     - {fileID: 114895398289663852, guid: 04725db679e5441458e62215d6891d1a, type: 2}
     - {fileID: 114003550936491666, guid: 04725db679e5441458e62215d6891d1a, type: 2}
+    - {fileID: 114104981378538848, guid: 04725db679e5441458e62215d6891d1a, type: 2}
+    - {fileID: 114310199044937968, guid: 04725db679e5441458e62215d6891d1a, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 04725db679e5441458e62215d6891d1a, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &1237668965

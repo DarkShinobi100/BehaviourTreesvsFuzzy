@@ -6,20 +6,36 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
 {
     private NewPlayer playerData;
     private NewPlayer ownData;
-
-    public ActionNode healthCheckNode;
-    public ActionNode DefenceCheckNode;
+    
+    //layer 3
+    //Attack Buff Sequence
+    public ActionNode AttackCheckNode;
     public ActionNode AttackValueCheckNode;
-    public ActionNode attackCheckNode;
-    public ActionNode ManaCheckNode;
 
+    //Defence Buff Sequence
+    public ActionNode DefenceCheckNode;
+    public ActionNode DefenceValueCheckNode;
+
+    //Mana Buff Sequence
+    public ActionNode ManaCheckNode;
+    public ActionNode ManaValueCheckNode;
+    
+    //layer 2
+    public Sequence AttackCheckSequence;
+    public Sequence DefenceCheckSequence;
+    public Sequence ManaCheckSequence;
+    //Health Sequence
+    public ActionNode ManaCheckHealthNode;
+    public ActionNode HealthCheckNode;
+    
+    //layer 1
+    public ActionNode AttackPlayerNode;
+    public Selector BuffSelectorNode;
+    public Sequence HealthCheckSequence;
+
+    //root
     public Selector rootNode;
 
-    //maybe
-
-    public RandomBinaryNode buffCheckRandomNode;
-    public ActionNode buffCheckNode;
-    public Sequence buffCheckSequence;
 
     public delegate void TreeExecuted();
     public event TreeExecuted onTreeExecuted;
@@ -29,35 +45,46 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
     void Start()
     {
         //Check low health, if its low it will decide to heal
-        healthCheckNode = new ActionNode(CriticalHealthCheck);
+        ManaCheckHealthNode = new ActionNode(CheckMana);
+        HealthCheckNode = new ActionNode(CriticalHealthCheck);
+    HealthCheckSequence = new Sequence(new List<Node> {
+            ManaCheckHealthNode,
+            HealthCheckNode,
+        });
         //          if cannot afford to heal it will regen mana
 
-        //Check low defence
-        DefenceCheckNode = new ActionNode(CheckDefence);
-
-        //Check low Attack
-        AttackValueCheckNode = new ActionNode(CheckAttack);
-        //Check player health, if it is low, it will go for the kill
-        attackCheckNode = new ActionNode(CheckPlayerHealth);
-
-        //Check Mana
-        ManaCheckNode = new ActionNode(CheckMana);
-
-
-        /* If neither the player nor the AI are low in health, the AI will 
-         * prioritize using a defensive buff. To avoid having the AI buff every turn, 
-         we use a binary randomizer to only do it half the time. */
-        buffCheckRandomNode = new RandomBinaryNode();
-        buffCheckNode = new ActionNode(BuffCheck);
-        buffCheckSequence = new Sequence(new List<Node> {
-            buffCheckRandomNode,
-            buffCheckNode,
+        //Check low Defence, if its low it will decide to buff
+        DefenceCheckNode = new ActionNode(CheckMana);
+        DefenceValueCheckNode = new ActionNode(CheckDefence);
+        DefenceCheckSequence = new Sequence(new List<Node> {
+            DefenceCheckNode,
+            DefenceValueCheckNode,
         });
 
+
+        //Check low Defence, if its low it will decide to buff
+        AttackCheckNode = new ActionNode(CheckMana);
+        AttackValueCheckNode = new ActionNode(CheckAttack);
+        AttackCheckSequence = new Sequence(new List<Node> {
+            AttackCheckNode,
+            AttackValueCheckNode,
+        });
+
+
+        //select the buff
+        BuffSelectorNode = new Selector(new List<Node> {
+            ManaCheckSequence,
+            DefenceCheckSequence,
+            AttackCheckSequence,
+        });
+
+        //Check player health, if it is low, it will go for the kill
+        AttackPlayerNode = new ActionNode(CheckPlayerHealth);
+
         rootNode = new Selector(new List<Node> {
-            healthCheckNode,
-            attackCheckNode,
-            buffCheckSequence,
+            HealthCheckSequence,
+            BuffSelectorNode,
+            AttackPlayerNode,
         });
     }
 
@@ -78,20 +105,34 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
         Debug.Log("The AI is thinking...");
         yield return new WaitForSeconds(0.00001f);
 
-        if (healthCheckNode.nodeState == NodeStates.SUCCESS)
+        //low health
+        if (HealthCheckSequence.nodeState == NodeStates.SUCCESS)
         {
             Debug.Log("The AI decided to heal itself");
+            
             ownData.Heal();
-        }
-        else if (attackCheckNode.nodeState == NodeStates.SUCCESS)
+        }//apply a buff
+        else if (BuffSelectorNode.nodeState == NodeStates.SUCCESS)
         {
-            Debug.Log("The AI decided to attack the player!");
+            //determine which buff to use
+            if (ManaCheckSequence.nodeState == NodeStates.SUCCESS)
+            {
+                Debug.Log("The AI decided to Increase mana!");
+
+            }
+            else if (DefenceCheckSequence.nodeState == NodeStates.SUCCESS)
+            {
+                Debug.Log("The AI decided to Increase Defence!");
+            }
+            else if(AttackCheckSequence.nodeState == NodeStates.SUCCESS)
+            {
+                Debug.Log("The AI decided to Increase Attack!");
+            }
+        }//attack the player
+        else if (AttackPlayerNode.nodeState == NodeStates.SUCCESS)
+        {
+            Debug.Log("The AI decided to attack the player");
             playerData.Damage(ownData.CurrentAttack);
-        }
-        else if (buffCheckSequence.nodeState == NodeStates.SUCCESS)
-        {
-            Debug.Log("The AI decided to defend itself");
-            //  ownData.Buff();
         }
         else
         {
@@ -160,18 +201,6 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
     private NodeStates CheckMana()
     {
         if (playerData.HasLowMana)
-        {
-            return NodeStates.SUCCESS;
-        }
-        else
-        {
-            return NodeStates.FAILURE;
-        }
-    }
-
-    private NodeStates BuffCheck()
-    {
-        if (ownData.CurrentAttack >0)
         {
             return NodeStates.SUCCESS;
         }
