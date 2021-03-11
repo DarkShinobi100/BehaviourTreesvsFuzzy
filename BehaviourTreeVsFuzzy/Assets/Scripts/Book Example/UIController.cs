@@ -11,6 +11,10 @@ public class UIController : MonoBehaviour {
     [SerializeField]
     private Player aiPlayer;
     [SerializeField]
+    private NewPlayer NewHumanPlayer;
+    [SerializeField]
+    private NewPlayer NewAiPlayer;
+    [SerializeField]
     private Text turnText;
     [SerializeField]
     private Text playerHealthText;
@@ -23,8 +27,16 @@ public class UIController : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        playerHealthText.text = "Hit points " + humanPlayer.CurrentHealth.ToString();
-        enemyHealthText.text = "Hit points " + aiPlayer.CurrentHealth.ToString();
+        if (!HumanPlayer)
+        {
+            playerHealthText.text = "Hit points " + NewHumanPlayer.CurrentHealth.ToString();
+            enemyHealthText.text = "Hit points " + NewAiPlayer.CurrentHealth.ToString();
+        }
+        else
+        {
+            playerHealthText.text = "Hit points " + humanPlayer.CurrentHealth.ToString();
+            enemyHealthText.text = "Hit points " + aiPlayer.CurrentHealth.ToString();
+        }       
     }
 
     public void EndGame() {

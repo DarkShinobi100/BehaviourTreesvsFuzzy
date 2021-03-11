@@ -48,7 +48,7 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
          * prioritize using a defensive buff. To avoid having the AI buff every turn, 
          we use a binary randomizer to only do it half the time. */
         buffCheckRandomNode = new RandomBinaryNode();
-     //   buffCheckNode = new ActionNode(BuffCheck);
+        buffCheckNode = new ActionNode(BuffCheck);
         buffCheckSequence = new Sequence(new List<Node> {
             buffCheckRandomNode,
             buffCheckNode,
@@ -76,7 +76,7 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
     private IEnumerator Execute()
     {
         Debug.Log("The AI is thinking...");
-       yield return new WaitForSeconds(0.00001f);
+        yield return new WaitForSeconds(0.00001f);
 
         if (healthCheckNode.nodeState == NodeStates.SUCCESS)
         {
@@ -91,7 +91,7 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
         else if (buffCheckSequence.nodeState == NodeStates.SUCCESS)
         {
             Debug.Log("The AI decided to defend itself");
-          //  ownData.Buff();
+            //  ownData.Buff();
         }
         else
         {
@@ -155,11 +155,23 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
             return NodeStates.FAILURE;
         }
     }
-            
+
     //Check Mana
     private NodeStates CheckMana()
     {
         if (playerData.HasLowMana)
+        {
+            return NodeStates.SUCCESS;
+        }
+        else
+        {
+            return NodeStates.FAILURE;
+        }
+    }
+
+    private NodeStates BuffCheck()
+    {
+        if (ownData.CurrentAttack >0)
         {
             return NodeStates.SUCCESS;
         }
