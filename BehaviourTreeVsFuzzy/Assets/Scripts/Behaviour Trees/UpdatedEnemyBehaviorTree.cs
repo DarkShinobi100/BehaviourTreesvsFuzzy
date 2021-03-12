@@ -118,9 +118,6 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
     private IEnumerator Execute()
     {
         Debug.Log("The AI is thinking...");
-
-        //trigger animation for "thinking"
-       // Self.SetTrigger("Attack");
         yield return new WaitForSeconds(2.5f);
 
         //low health
