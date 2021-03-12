@@ -101,11 +101,11 @@ public class NewPlayer : MonoBehaviour
     {
         int damageAmount = DefenceValue - receivedDamage;
         DefenceValue--;
-        if (damageAmount<=0)
+        if (damageAmount <= 0)
         {
             damageAmount = 2;
         }
-        if(DefenceValue <0)
+        if (DefenceValue < 0)
         {
             DefenceValue = 1;
         }
@@ -133,11 +133,17 @@ public class NewPlayer : MonoBehaviour
 
     public int increaseMana()
     {
-        currentMana = currentMana+5;
-        if(currentMana>maxMana)
+        currentMana = currentMana + 5;
+        if (currentMana > maxMana)
         {
             currentMana = maxMana;
         }
         return currentMana;
+    }
+
+    public int DecreaseMana()
+    {
+        --currentMana;
+        return CurrentMana;
     }
 }

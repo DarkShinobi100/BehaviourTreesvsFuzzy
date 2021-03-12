@@ -36,7 +36,6 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
     //root
     public Selector rootNode;
 
-
     public delegate void TreeExecuted();
     public event TreeExecuted onTreeExecuted;
 
@@ -47,11 +46,20 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
         //Check low health, if its low it will decide to heal
         ManaCheckHealthNode = new ActionNode(CheckMana);
         HealthCheckNode = new ActionNode(CriticalHealthCheck);
-    HealthCheckSequence = new Sequence(new List<Node> {
+        HealthCheckSequence = new Sequence(new List<Node> {
             ManaCheckHealthNode,
             HealthCheckNode,
         });
         //          if cannot afford to heal it will regen mana
+
+        //Check low Mana, if its low it will decide to buff
+        ManaCheckNode = new ActionNode(CheckMana);
+        ManaValueCheckNode = new ActionNode(CheckMana);
+        ManaCheckSequence = new Sequence(new List<Node> {
+            ManaCheckNode,
+            ManaValueCheckNode,
+        });
+
 
         //Check low Defence, if its low it will decide to buff
         DefenceCheckNode = new ActionNode(CheckMana);
@@ -109,7 +117,8 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
         if (HealthCheckSequence.nodeState == NodeStates.SUCCESS)
         {
             Debug.Log("The AI decided to heal itself");
-            
+
+            ownData.DecreaseMana();
             ownData.Heal();
         }//apply a buff
         else if (BuffSelectorNode.nodeState == NodeStates.SUCCESS)
@@ -118,15 +127,19 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
             if (ManaCheckSequence.nodeState == NodeStates.SUCCESS)
             {
                 Debug.Log("The AI decided to Increase mana!");
-
+                ownData.increaseMana();                
             }
             else if (DefenceCheckSequence.nodeState == NodeStates.SUCCESS)
             {
                 Debug.Log("The AI decided to Increase Defence!");
+                ownData.DecreaseMana();
+                ownData.increaseDefence();
             }
             else if(AttackCheckSequence.nodeState == NodeStates.SUCCESS)
             {
                 Debug.Log("The AI decided to Increase Attack!");
+                ownData.DecreaseMana();
+                ownData.increaseAttack();
             }
         }//attack the player
         else if (AttackPlayerNode.nodeState == NodeStates.SUCCESS)
