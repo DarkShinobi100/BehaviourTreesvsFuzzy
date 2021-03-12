@@ -631,13 +631,59 @@ MonoBehaviour:
   currentHealth: 0
   maxMana: 20
   currentMana: 0
-  AttackValue: 0
-  DefenceValue: 0
+  AttackValue: 10
+  DefenceValue: 5
   MagicAttackValue: 0
   lowHealthThreshold: 7
   lowManaThreshold: 5
   lowDefenceThreshold: 3
   lowAttackThreshold: 2
+--- !u!212 &997480106
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 997480104}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 37e946e6012703447a39dfb5ee2f3cd7, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.42, y: 0.63}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!114 &997480107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -649,6 +695,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a5e89242a4e459408d91953d3d0aaf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Self: {fileID: 0}
+--- !u!95 &997480108
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 997480104}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 22100000, guid: 1876fe49cb514794a929ed23de5da7fe, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1024686314 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1855605371942674, guid: 04725db679e5441458e62215d6891d1a,
@@ -669,13 +734,31 @@ MonoBehaviour:
   currentHealth: 0
   maxMana: 20
   currentMana: 0
-  AttackValue: 0
-  DefenceValue: 0
+  AttackValue: 10
+  DefenceValue: 5
   MagicAttackValue: 0
   lowHealthThreshold: 7
   lowManaThreshold: 5
   lowDefenceThreshold: 3
   lowAttackThreshold: 2
+--- !u!95 &1024686316
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1024686314}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 87f9e404c7adda74b9ab60a0c19a1f97, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1024686317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -687,6 +770,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a5e89242a4e459408d91953d3d0aaf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Self: {fileID: 0}
 --- !u!1 &1062744963 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1566490285154934, guid: 04725db679e5441458e62215d6891d1a,
@@ -770,6 +854,10 @@ Prefab:
       propertyPath: NewHumanPlayer
       value: 
       objectReference: {fileID: 997480105}
+    - target: {fileID: 4248543315424446, guid: 04725db679e5441458e62215d6891d1a, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114895398289663852, guid: 04725db679e5441458e62215d6891d1a, type: 2}
     - {fileID: 114003550936491666, guid: 04725db679e5441458e62215d6891d1a, type: 2}

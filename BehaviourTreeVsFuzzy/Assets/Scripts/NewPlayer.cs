@@ -2,6 +2,8 @@
 
 public class NewPlayer : MonoBehaviour
 {
+    private Animator Self;
+
     [SerializeField]
     private int maxHealth = 20;
 
@@ -88,6 +90,10 @@ public class NewPlayer : MonoBehaviour
         AttackValue = 10;
         MagicAttackValue = 3;
         DefenceValue = 5;
+
+        //own animator
+        //Get the Animator attached to the GameObject you are intending to animate.
+        Self = gameObject.GetComponent<Animator>();
     }
 
     public int Heal()
@@ -101,7 +107,7 @@ public class NewPlayer : MonoBehaviour
     {
         int damageAmount = receivedDamage - DefenceValue;
         DefenceValue--;
-        if(DefenceValue<0)
+        if (DefenceValue < 0)
         {
             DefenceValue = 0;
         }
@@ -114,6 +120,8 @@ public class NewPlayer : MonoBehaviour
             DefenceValue = 1;
         }
         currentHealth -= damageAmount;
+        Self.SetTrigger("Hit");
+
         return currentHealth;
     }
 

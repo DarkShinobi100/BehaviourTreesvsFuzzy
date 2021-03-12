@@ -7,6 +7,8 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
     private NewPlayer playerData;
     private NewPlayer ownData;
 
+    private Animator Self;
+
     //layer 3
     //Attack Buff Sequence
     public ActionNode AttackCheckNode;
@@ -94,6 +96,11 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
             BuffSelectorNode,
             AttackPlayerNode,
         });
+
+
+        //own animator
+        //Get the Animator attached to the GameObject you are intending to animate.
+        Self = gameObject.GetComponent<Animator>();
     }
 
     public void SetPlayerData(NewPlayer human, NewPlayer ai)
@@ -111,7 +118,10 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
     private IEnumerator Execute()
     {
         Debug.Log("The AI is thinking...");
-        yield return new WaitForSeconds(0.5f);
+
+        //trigger animation for "thinking"
+       // Self.SetTrigger("Attack");
+        yield return new WaitForSeconds(2.5f);
 
         //low health
         if (HealthCheckSequence.nodeState == NodeStates.SUCCESS)
@@ -120,6 +130,9 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
 
             ownData.DecreaseMana(5);
             ownData.Heal();
+
+            //animation for healing
+            Self.SetTrigger("Heal");
         }//apply a buff
         else if (BuffSelectorNode.nodeState == NodeStates.SUCCESS)
         {
@@ -128,18 +141,27 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
             {
                 Debug.Log("The AI decided to Increase mana!");
                 ownData.increaseMana();
+
+                //animation for increasing mana
+                Self.SetTrigger("BuffMana");
             }
             else if (DefenceCheckSequence.nodeState == NodeStates.SUCCESS)
             {
                 Debug.Log("The AI decided to Increase Defence!");
                 ownData.DecreaseMana(2);
                 ownData.increaseDefence();
+
+                //animation for increasing Defence
+                Self.SetTrigger("BuffDefence");
             }
             else if (AttackCheckSequence.nodeState == NodeStates.SUCCESS)
             {
                 Debug.Log("The AI decided to Increase Attack!");
                 ownData.DecreaseMana(2);
                 ownData.increaseAttack();
+
+                //animation for increasing Attack
+                Self.SetTrigger("BuffAttack");
             }
         }//attack the player
         else if (AttackPlayerNode.nodeState == NodeStates.SUCCESS)
@@ -148,6 +170,8 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
             playerData.Damage(ownData.CurrentAttack);
             ownData.DecreaseAttack();
             ownData.DecreaseMana(1);
+            //animation for attacking
+            Self.SetTrigger("Attack");
         }
         else
         {
@@ -155,6 +179,9 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
             playerData.Damage(ownData.CurrentAttack);
             ownData.DecreaseAttack();
             ownData.DecreaseMana(1);
+
+            //animation for attacking
+            Self.SetTrigger("Attack");
         }
         if (onTreeExecuted != null)
         {
