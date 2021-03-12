@@ -6,7 +6,7 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
 {
     private NewPlayer playerData;
     private NewPlayer ownData;
-    
+
     //layer 3
     //Attack Buff Sequence
     public ActionNode AttackCheckNode;
@@ -19,7 +19,7 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
     //Mana Buff Sequence
     public ActionNode ManaCheckNode;
     public ActionNode ManaValueCheckNode;
-    
+
     //layer 2
     public Sequence AttackCheckSequence;
     public Sequence DefenceCheckSequence;
@@ -27,7 +27,7 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
     //Health Sequence
     public ActionNode ManaCheckHealthNode;
     public ActionNode HealthCheckNode;
-    
+
     //layer 1
     public ActionNode AttackPlayerNode;
     public Selector BuffSelectorNode;
@@ -44,7 +44,7 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
     void Start()
     {
         //Check low health, if its low it will decide to heal
-        ManaCheckHealthNode = new ActionNode(CheckMana);
+        ManaCheckHealthNode = new ActionNode(CanUseMana);
         HealthCheckNode = new ActionNode(CriticalHealthCheck);
         HealthCheckSequence = new Sequence(new List<Node> {
             ManaCheckHealthNode,
@@ -62,7 +62,7 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
 
 
         //Check low Defence, if its low it will decide to buff
-        DefenceCheckNode = new ActionNode(CheckMana);
+        DefenceCheckNode = new ActionNode(CanUseMana);
         DefenceValueCheckNode = new ActionNode(CheckDefence);
         DefenceCheckSequence = new Sequence(new List<Node> {
             DefenceCheckNode,
@@ -71,7 +71,7 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
 
 
         //Check low Defence, if its low it will decide to buff
-        AttackCheckNode = new ActionNode(CheckMana);
+        AttackCheckNode = new ActionNode(CanUseMana);
         AttackValueCheckNode = new ActionNode(CheckAttack);
         AttackCheckSequence = new Sequence(new List<Node> {
             AttackCheckNode,
@@ -111,14 +111,14 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
     private IEnumerator Execute()
     {
         Debug.Log("The AI is thinking...");
-        yield return new WaitForSeconds(0.00001f);
+        yield return new WaitForSeconds(0.5f);
 
         //low health
         if (HealthCheckSequence.nodeState == NodeStates.SUCCESS)
         {
             Debug.Log("The AI decided to heal itself");
 
-            ownData.DecreaseMana();
+            ownData.DecreaseMana(5);
             ownData.Heal();
         }//apply a buff
         else if (BuffSelectorNode.nodeState == NodeStates.SUCCESS)
@@ -127,18 +127,18 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
             if (ManaCheckSequence.nodeState == NodeStates.SUCCESS)
             {
                 Debug.Log("The AI decided to Increase mana!");
-                ownData.increaseMana();                
+                ownData.increaseMana();
             }
             else if (DefenceCheckSequence.nodeState == NodeStates.SUCCESS)
             {
                 Debug.Log("The AI decided to Increase Defence!");
-                ownData.DecreaseMana();
+                ownData.DecreaseMana(2);
                 ownData.increaseDefence();
             }
-            else if(AttackCheckSequence.nodeState == NodeStates.SUCCESS)
+            else if (AttackCheckSequence.nodeState == NodeStates.SUCCESS)
             {
                 Debug.Log("The AI decided to Increase Attack!");
-                ownData.DecreaseMana();
+                ownData.DecreaseMana(2);
                 ownData.increaseAttack();
             }
         }//attack the player
@@ -146,11 +146,15 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
         {
             Debug.Log("The AI decided to attack the player");
             playerData.Damage(ownData.CurrentAttack);
+            ownData.DecreaseAttack();
+            ownData.DecreaseMana(1);
         }
         else
         {
-            Debug.Log("The AI finally decided to attack the player");
+            Debug.Log("COULD NOT DECIDE");
             playerData.Damage(ownData.CurrentAttack);
+            ownData.DecreaseAttack();
+            ownData.DecreaseMana(1);
         }
         if (onTreeExecuted != null)
         {
@@ -174,7 +178,7 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
     //Check low defence
     private NodeStates CheckDefence()
     {
-        if (playerData.HasLowDefence)
+        if (ownData.HasLowDefence)
         {
             return NodeStates.SUCCESS;
         }
@@ -187,7 +191,7 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
     //Check low Attack
     private NodeStates CheckAttack()
     {
-        if (playerData.HasLowAttack)
+        if (ownData.HasLowAttack)
         {
             return NodeStates.SUCCESS;
         }
@@ -213,7 +217,19 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
     //Check Mana
     private NodeStates CheckMana()
     {
-        if (playerData.HasLowMana)
+        if (ownData.HasLowMana)
+        {
+            return NodeStates.SUCCESS;
+        }
+        else
+        {
+            return NodeStates.FAILURE;
+        }
+    }
+
+    private NodeStates CanUseMana()
+    {
+        if (ownData.CurrentMana >5)
         {
             return NodeStates.SUCCESS;
         }

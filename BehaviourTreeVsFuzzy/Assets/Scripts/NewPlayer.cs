@@ -85,9 +85,9 @@ public class NewPlayer : MonoBehaviour
         //set player stats
         currentHealth = maxHealth;
         currentMana = maxMana;
-        AttackValue = 2;
+        AttackValue = 10;
         MagicAttackValue = 3;
-        DefenceValue = 1;
+        DefenceValue = 5;
     }
 
     public int Heal()
@@ -99,11 +99,15 @@ public class NewPlayer : MonoBehaviour
 
     public int Damage(int receivedDamage)
     {
-        int damageAmount = DefenceValue - receivedDamage;
+        int damageAmount = receivedDamage - DefenceValue;
         DefenceValue--;
+        if(DefenceValue<0)
+        {
+            DefenceValue = 0;
+        }
         if (damageAmount <= 0)
         {
-            damageAmount = 2;
+            damageAmount = 0;
         }
         if (DefenceValue < 0)
         {
@@ -115,13 +119,13 @@ public class NewPlayer : MonoBehaviour
 
     public int increaseAttack()
     {
-        AttackValue++;
+        AttackValue += Random.Range(1, 5);
         return AttackValue;
     }
 
     public int increaseDefence()
     {
-        DefenceValue++;
+        DefenceValue += Random.Range(1, 5);
         return DefenceValue;
     }
 
@@ -133,7 +137,7 @@ public class NewPlayer : MonoBehaviour
 
     public int increaseMana()
     {
-        currentMana = currentMana + 5;
+        currentMana += Random.Range(5,10);
         if (currentMana > maxMana)
         {
             currentMana = maxMana;
@@ -141,9 +145,23 @@ public class NewPlayer : MonoBehaviour
         return currentMana;
     }
 
-    public int DecreaseMana()
+    public int DecreaseMana(int cost)
     {
-        --currentMana;
-        return CurrentMana;
+        currentMana = currentMana - cost;
+        if(currentMana <0)
+        {
+            currentMana = 0;
+        }
+        return currentMana;
+    }
+
+    public int DecreaseAttack()
+    {
+        --AttackValue;
+        if (AttackValue < 0)
+        {
+            AttackValue = 0;
+        }
+        return AttackValue;
     }
 }
