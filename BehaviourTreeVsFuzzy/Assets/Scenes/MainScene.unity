@@ -4342,6 +4342,14 @@ MonoBehaviour:
   lowManaThreshold: 5
   lowDefenceThreshold: 3
   lowAttackThreshold: 2
+  Health: {fileID: 805764556}
+  Mana: {fileID: 1903335190}
+  Attack: {fileID: 1802890543}
+  Defence: {fileID: 1853059805}
+  MinHealth: {fileID: 358279054}
+  MinMana: {fileID: 798513408}
+  MinAttack: {fileID: 2025646017}
+  MinDefence: {fileID: 799799633}
 --- !u!212 &997480106
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4513,6 +4521,14 @@ MonoBehaviour:
   lowManaThreshold: 5
   lowDefenceThreshold: 3
   lowAttackThreshold: 2
+  Health: {fileID: 681468402}
+  Mana: {fileID: 1644775731}
+  Attack: {fileID: 638604479}
+  Defence: {fileID: 1673881216}
+  MinHealth: {fileID: 584362085}
+  MinMana: {fileID: 154808880}
+  MinAttack: {fileID: 1808695795}
+  MinDefence: {fileID: 1122671107}
 --- !u!95 &1024686316
 Animator:
   serializedVersion: 3
