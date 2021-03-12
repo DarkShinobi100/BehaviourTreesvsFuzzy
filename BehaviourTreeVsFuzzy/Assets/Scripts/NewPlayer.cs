@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class NewPlayer : MonoBehaviour
 {
@@ -34,6 +35,28 @@ public class NewPlayer : MonoBehaviour
     private int lowDefenceThreshold = 3;
     [SerializeField]
     private int lowAttackThreshold = 2;
+
+
+
+    //user sliders
+    [SerializeField]
+    private Slider Health;
+    [SerializeField]
+    private Slider Mana;
+    [SerializeField]
+    private Slider Attack;
+    [SerializeField]
+    private Slider Defence;
+    [SerializeField]
+    private Slider MinHealth;
+    [SerializeField]
+    private Slider MinMana;
+    [SerializeField]
+    private Slider MinAttack;
+    [SerializeField]
+    private Slider MinDefence;
+
+
 
     [Header("Ability Parameters")]
     private int minHealAmount = 2;
@@ -90,6 +113,17 @@ public class NewPlayer : MonoBehaviour
         AttackValue = 10;
         MagicAttackValue = 3;
         DefenceValue = 5;
+
+        //stats from sliders
+        currentHealth = (int)Health.value;
+        currentMana = (int)Mana.value;
+        AttackValue = (int)Attack.value;
+        DefenceValue = (int)Defence.value;
+
+        lowHealthThreshold = (int)MinHealth.value;
+        lowManaThreshold = (int)MinMana.value;
+        lowAttackThreshold = (int)MinAttack.value;
+        lowDefenceThreshold = (int)MinDefence.value;
 
         //own animator
         //Get the Animator attached to the GameObject you are intending to animate.
