@@ -15,6 +15,10 @@ public class NewUI : MonoBehaviour
     [SerializeField]
     private NewPlayer FarAiPlayer;
     [SerializeField]
+    private UpdatedEnemyBehaviorTree enemyBehaviorTreeFar;
+    [SerializeField]
+    private UpdatedEnemyBehaviorTree enemyBehaviorTreeNear;
+    [SerializeField]
     private Text turnText;
     [SerializeField]
     private Text playerHealthText;
@@ -69,12 +73,16 @@ public class NewUI : MonoBehaviour
             turnText.text = playerTurnMessage;
             playerHealthText.text = ActionMessage;
             enemyHealthText.text = WaitMessage;
+            enemyBehaviorTreeFar.ResetSprites();
+            enemyBehaviorTreeNear.UpdateSprites();
         }
         else
         {
             turnText.text = aiTurnMessage;
             enemyHealthText.text = ActionMessage;
             playerHealthText.text = WaitMessage;
+            enemyBehaviorTreeNear.ResetSprites();
+            enemyBehaviorTreeFar.UpdateSprites();
         }
     }
 

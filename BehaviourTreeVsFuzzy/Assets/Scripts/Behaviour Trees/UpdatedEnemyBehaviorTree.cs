@@ -13,14 +13,6 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
     private AudioClip[] SFX = new AudioClip[6];
     private AudioSource audioPlayer;
 
-    /*enum states colours */
-    [SerializeField]
-    private Color m_evaluating;
-    [SerializeField]
-    private Color m_succeeded;
-    [SerializeField]
-    private Color m_failed;
-
     // Spritees for Visuals
     //attack buff sequence
     [SerializeField]
@@ -483,6 +475,24 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
 
     }
 
+    public void ResetSprites()
+    {
+        rootNodeSprite.color = new Color(255, 255, 255);
+        HealthCheckSequenceSprite.color = new Color(255, 255, 255);
+        BuffSelectorNodeSprite.color = new Color(255, 255, 255);
+        AttackPlayerNodeSprite.color = new Color(255, 255, 255);
+        HealthCheckNodeSprite.color = new Color(255, 255, 255);
+        ManaCheckHealthNodeSprite.color = new Color(255, 255, 255);
+        ManaCheckSequenceSprite.color = new Color(255, 255, 255);
+        DefenceCheckSequenceSprite.color = new Color(255, 255, 255);
+        AttackCheckSequenceSprite.color = new Color(255, 255, 255);
+        ManaValueCheckNodeSprite.color = new Color(255, 255, 255);
+        ManaCheckNodeSprite.color = new Color(255, 255, 255);
+        DefenceValueCheckNodeSprite.color = new Color(255, 255, 255);
+        DefenceCheckNodeSprite.color = new Color(255, 255, 255);
+        AttackValueCheckNodeSprite.color = new Color(255, 255, 255);
+        AttackCheckNodeSprite.color = new Color(255, 255, 255);         
+    }
     private void SetEvaluating(Image Sprite)
     {
         Sprite.color = new Color(255, 255, 0, 255);
