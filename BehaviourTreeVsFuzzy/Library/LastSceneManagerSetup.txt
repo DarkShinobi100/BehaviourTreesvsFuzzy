@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/MainScene.unity
+- path: C:/Users/User/Downloads/Unity-2017-Game-AI-Programming-Third-Edition-master/Unity-2017-Game-AI-Programming-Third-Edition-master/Chapter07/Assets/FuzzlyExample/FuzzySample.unity
   isLoaded: 1
   isActive: 1
