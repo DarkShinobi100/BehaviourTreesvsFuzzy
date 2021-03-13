@@ -13,7 +13,7 @@ public class NewGame : MonoBehaviour
     [SerializeField]
     private NewPlayer aiPlayer;
     [SerializeField]
-    private UIController uiController;
+    private NewUI uiController;
     private int turn = 0;
 
     private void Awake()
