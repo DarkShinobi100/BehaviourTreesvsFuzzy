@@ -6,7 +6,7 @@ public class NewUI : MonoBehaviour
     private const string playerTurnMessage = "Your turn";
     private const string aiTurnMessage = "Enemy's turn";
     private const string gameOverMessage = "GAME OVER";
-    private const string ActionMessage = "Now Thinking";
+    private const string ActionMessage = "New behaviour";
     private const string WaitMessage = "";
     private const string WinMessage = "You win!";
     private const string LoseMessage = "You Lose!";
@@ -24,6 +24,10 @@ public class NewUI : MonoBehaviour
     private Text playerHealthText;
     [SerializeField]
     private Text enemyHealthText;
+    [SerializeField]
+    private Text AINearStateText;
+    [SerializeField]
+    private Text AiFarStateText;
 
     //user sliders
     [SerializeField]
@@ -57,11 +61,13 @@ public class NewUI : MonoBehaviour
         {
             playerHealthText.text = LoseMessage;
             enemyHealthText.text = WinMessage;
+            AINearStateText.text = "";
         }
         else
         {
             playerHealthText.text = WinMessage;
             enemyHealthText.text = LoseMessage;
+            AiFarStateText.text = "";
         }
     }
 

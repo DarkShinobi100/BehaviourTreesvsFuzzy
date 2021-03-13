@@ -12,6 +12,9 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
     [SerializeField]
     private AudioClip[] SFX = new AudioClip[6];
     private AudioSource audioPlayer;
+    [SerializeField]
+    private Text StateText;
+
 
     // Spritees for Visuals
     //attack buff sequence
@@ -184,6 +187,7 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
 
             //animation for healing
             animator.SetTrigger("Heal");
+            StateText.text = "Heal!";
 
             //sound effect
             audioPlayer.PlayOneShot(SFX[0]);
@@ -199,6 +203,8 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
 
                 //animation for increasing mana
                 animator.SetTrigger("BuffMana");
+
+                StateText.text = "Increase mana!";
                 //sound effect
                 audioPlayer.PlayOneShot(SFX[1]);
             }
@@ -211,12 +217,13 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
 
                 //animation for increasing Defence
                 animator.SetTrigger("BuffDefence");
+                StateText.text = "Increase Defence!";
                 //sound effect
                 audioPlayer.PlayOneShot(SFX[2]);
             }
             else if (AttackCheckSequence.nodeState == NodeStates.SUCCESS)
             {
-                Debug.Log("The AI decided to Increase Attack!");
+                Debug.Log("Increase Attack!");
 
                 UpdateSprites();
                 ownData.DecreaseMana(2);
@@ -224,6 +231,7 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
 
                 //animation for increasing Attack
                 animator.SetTrigger("BuffAttack");
+                StateText.text = "Increase Attack!";
                 //sound effect
                 audioPlayer.PlayOneShot(SFX[3]);
             }
@@ -237,6 +245,7 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
             ownData.DecreaseMana(1);
             //animation for attacking
             animator.SetTrigger("Attack");
+            StateText.text = "Direct Attack!";
             //sound effect
             audioPlayer.PlayOneShot(SFX[4]);
         }
@@ -250,6 +259,7 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
 
             //animation for attacking
             animator.SetTrigger("Attack");
+            StateText.text = "Default Attack";
             //sound effect
             audioPlayer.PlayOneShot(SFX[5]);
         }
@@ -477,6 +487,7 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
 
     public void ResetSprites()
     {
+        StateText.text = "";
         rootNodeSprite.color = new Color(255, 255, 255);
         HealthCheckSequenceSprite.color = new Color(255, 255, 255);
         BuffSelectorNodeSprite.color = new Color(255, 255, 255);
