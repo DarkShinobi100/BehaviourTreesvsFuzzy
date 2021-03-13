@@ -56,7 +56,7 @@ public class NewPlayer : MonoBehaviour
     [SerializeField]
     private Slider MinDefence;
 
-
+    private bool UpdateDuring = false;
 
     [Header("Ability Parameters")]
     private int minHealAmount = 2;
@@ -128,6 +128,23 @@ public class NewPlayer : MonoBehaviour
         //own animator
         //Get the Animator attached to the GameObject you are intending to animate.
         Self = gameObject.GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+        if (UpdateDuring)
+        {
+            //stats from sliders   
+            lowHealthThreshold = (int)MinHealth.value;
+            lowManaThreshold = (int)MinMana.value;
+            lowAttackThreshold = (int)MinAttack.value;
+            lowDefenceThreshold = (int)MinDefence.value;
+        }
+    }
+
+    public void SetUpdateDuring()
+    {
+        UpdateDuring = true;
     }
 
     public int Heal()
