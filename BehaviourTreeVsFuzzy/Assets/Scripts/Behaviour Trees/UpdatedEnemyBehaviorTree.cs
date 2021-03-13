@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class UpdatedEnemyBehaviorTree : MonoBehaviour
 {
@@ -11,7 +12,62 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
     [SerializeField]
     private AudioClip[] SFX = new AudioClip[6];
     private AudioSource audioPlayer;
-    
+
+    /*enum states colours */
+    [SerializeField]
+    private Color m_evaluating;
+    [SerializeField]
+    private Color m_succeeded;
+    [SerializeField]
+    private Color m_failed;
+
+    // Spritees for Visuals
+    //attack buff sequence
+    [SerializeField]
+    private Image AttackCheckNodeSprite;
+    [SerializeField]
+    private Image AttackValueCheckNodeSprite;
+
+    //defence buff sequence
+    [SerializeField]
+    private Image DefenceCheckNodeSprite;
+    [SerializeField]
+    private Image DefenceValueCheckNodeSprite;
+
+    //mana buff sequence
+    [SerializeField]
+    private Image ManaCheckNodeSprite;
+    [SerializeField]
+    private Image ManaValueCheckNodeSprite;
+
+    //layer 2
+    [SerializeField]
+    private Image AttackCheckSequenceSprite;
+    [SerializeField]
+    private Image DefenceCheckSequenceSprite;
+    [SerializeField]
+    private Image ManaCheckSequenceSprite;
+
+    //health sequence
+    [SerializeField]
+    private Image ManaCheckHealthNodeSprite;
+    [SerializeField]
+    private Image HealthCheckNodeSprite;
+
+    //layer 1
+    [SerializeField]
+    private Image AttackPlayerNodeSprite;
+    [SerializeField]
+    private Image BuffSelectorNodeSprite;
+    [SerializeField]
+    private Image HealthCheckSequenceSprite;
+
+    //root
+    [SerializeField]
+    private Image rootNodeSprite;
+
+
+
     //layer 3
     //Attack Buff Sequence
     public ActionNode AttackCheckNode;
@@ -125,12 +181,12 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
     {
         Debug.Log("The AI is thinking...");
         yield return new WaitForSeconds(2.5f);
-
+     
         //low health
         if (HealthCheckSequence.nodeState == NodeStates.SUCCESS)
         {
             Debug.Log("The AI decided to heal itself");
-
+            UpdateSprites();
             ownData.DecreaseMana(5);
             ownData.Heal();
 
@@ -146,6 +202,7 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
             if (ManaCheckSequence.nodeState == NodeStates.SUCCESS)
             {
                 Debug.Log("The AI decided to Increase mana!");
+                UpdateSprites();
                 ownData.increaseMana();
 
                 //animation for increasing mana
@@ -156,6 +213,7 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
             else if (DefenceCheckSequence.nodeState == NodeStates.SUCCESS)
             {
                 Debug.Log("The AI decided to Increase Defence!");
+                UpdateSprites();
                 ownData.DecreaseMana(2);
                 ownData.increaseDefence();
 
@@ -167,6 +225,8 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
             else if (AttackCheckSequence.nodeState == NodeStates.SUCCESS)
             {
                 Debug.Log("The AI decided to Increase Attack!");
+
+                UpdateSprites();
                 ownData.DecreaseMana(2);
                 ownData.increaseAttack();
 
@@ -179,6 +239,7 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
         else if (AttackPlayerNode.nodeState == NodeStates.SUCCESS)
         {
             Debug.Log("The AI decided to attack the player");
+            UpdateSprites();
             playerData.Damage(ownData.CurrentAttack);
             ownData.DecreaseAttack();
             ownData.DecreaseMana(1);
@@ -190,6 +251,7 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
         else
         {
             Debug.Log("Default Attack");
+            UpdateSprites();
             playerData.Damage(ownData.CurrentAttack);
             ownData.DecreaseAttack();
             ownData.DecreaseMana(1);
@@ -272,7 +334,7 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
 
     private NodeStates CanUseMana()
     {
-        if (ownData.CurrentMana >5)
+        if (ownData.CurrentMana > 5)
         {
             return NodeStates.SUCCESS;
         }
@@ -280,5 +342,159 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
         {
             return NodeStates.FAILURE;
         }
+    }
+
+    public void UpdateSprites()
+    {
+        if (rootNode.nodeState == NodeStates.SUCCESS)
+        {
+            SetSucceeded(rootNodeSprite);
+        }
+        else if (rootNode.nodeState == NodeStates.FAILURE)
+        {
+            SetFailed(rootNodeSprite);
+        }
+        
+        if (HealthCheckSequence.nodeState == NodeStates.SUCCESS)
+        {
+            SetSucceeded(HealthCheckSequenceSprite);
+        }
+        else if (HealthCheckSequence.nodeState == NodeStates.FAILURE)
+        {
+            SetFailed(HealthCheckSequenceSprite);
+        }        
+
+        if (BuffSelectorNode.nodeState == NodeStates.SUCCESS)
+        {
+            SetSucceeded(BuffSelectorNodeSprite);
+        }
+        else if (BuffSelectorNode.nodeState == NodeStates.FAILURE)
+        {
+            SetFailed(BuffSelectorNodeSprite);
+        }
+
+        if (AttackPlayerNode.nodeState == NodeStates.SUCCESS)
+        {
+            SetSucceeded(AttackPlayerNodeSprite);
+        }
+        else if (AttackPlayerNode.nodeState == NodeStates.FAILURE)
+        {
+            SetFailed(AttackPlayerNodeSprite);
+        }
+
+        if (HealthCheckNode.nodeState == NodeStates.SUCCESS)
+        {
+            SetSucceeded(HealthCheckNodeSprite);
+        }
+        else if (HealthCheckNode.nodeState == NodeStates.FAILURE)
+        {
+            SetFailed(HealthCheckNodeSprite);
+        }
+
+        if (ManaCheckHealthNode.nodeState == NodeStates.SUCCESS)
+        {
+            SetSucceeded(ManaCheckHealthNodeSprite);
+        }
+        else if (ManaCheckHealthNode.nodeState == NodeStates.FAILURE)
+        {
+            SetFailed(ManaCheckHealthNodeSprite);
+        }
+
+        if (ManaCheckSequence.nodeState == NodeStates.SUCCESS)
+        {
+            SetSucceeded(ManaCheckSequenceSprite);
+        }
+        else if (ManaCheckSequence.nodeState == NodeStates.FAILURE)
+        {
+            SetFailed(ManaCheckSequenceSprite);
+        }
+
+        if (DefenceCheckSequence.nodeState == NodeStates.SUCCESS)
+        {
+            SetSucceeded(DefenceCheckSequenceSprite);
+        }
+        else if (DefenceCheckSequence.nodeState == NodeStates.FAILURE)
+        {
+            SetFailed(DefenceCheckSequenceSprite);
+        }
+
+        if (AttackCheckSequence.nodeState == NodeStates.SUCCESS)
+        {
+            SetSucceeded(AttackCheckSequenceSprite);
+        }
+        else if (AttackCheckSequence.nodeState == NodeStates.FAILURE)
+        {
+            SetFailed(AttackCheckSequenceSprite);
+        }
+
+        if (ManaValueCheckNode.nodeState == NodeStates.SUCCESS)
+        {
+            SetSucceeded(ManaValueCheckNodeSprite);
+        }
+        else if (ManaValueCheckNode.nodeState == NodeStates.FAILURE)
+        {
+            SetFailed(ManaValueCheckNodeSprite);
+        }
+
+        if (ManaCheckNode.nodeState == NodeStates.SUCCESS)
+        {
+            SetSucceeded(ManaCheckNodeSprite);
+        }
+        else if (ManaCheckNode.nodeState == NodeStates.FAILURE)
+        {
+            SetFailed(ManaCheckNodeSprite);
+        }
+
+        if (DefenceValueCheckNode.nodeState == NodeStates.SUCCESS)
+        {
+            SetSucceeded(DefenceValueCheckNodeSprite);
+        }
+        else if (DefenceValueCheckNode.nodeState == NodeStates.FAILURE)
+        {
+            SetFailed(DefenceValueCheckNodeSprite);
+        }
+
+        if (DefenceCheckNode.nodeState == NodeStates.SUCCESS)
+        {
+            SetSucceeded(DefenceCheckNodeSprite);
+        }
+        else if (DefenceCheckNode.nodeState == NodeStates.FAILURE)
+        {
+            SetFailed(DefenceCheckNodeSprite);
+        }
+
+        if (AttackValueCheckNode.nodeState == NodeStates.SUCCESS)
+        {
+            SetSucceeded(AttackValueCheckNodeSprite);
+        }
+        else if (AttackValueCheckNode.nodeState == NodeStates.FAILURE)
+        {
+            SetFailed(AttackValueCheckNodeSprite);
+        }
+
+        if (AttackCheckNode.nodeState == NodeStates.SUCCESS)
+        {
+            SetSucceeded(AttackCheckNodeSprite);
+        }
+        else if (AttackCheckNode.nodeState == NodeStates.FAILURE)
+        {
+            SetFailed(AttackCheckNodeSprite);
+        }
+
+    }
+
+    private void SetEvaluating(Image Sprite)
+    {
+        Sprite.color = new Color(255, 255, 0, 255);
+    }
+
+    private void SetSucceeded(Image Sprite)
+    {
+        Sprite.color = new Color(0, 255, 0, 255); 
+    }
+
+    private void SetFailed(Image Sprite)
+    {
+        Sprite.color = new Color(255, 0, 0, 255);
     }
 }

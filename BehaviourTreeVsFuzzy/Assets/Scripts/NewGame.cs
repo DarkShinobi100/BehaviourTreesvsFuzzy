@@ -42,6 +42,8 @@ public class NewGame : MonoBehaviour
             uiController.EndGame();
             return;
         }
+        enemyBehaviorTreeFar.UpdateSprites();
+        enemyBehaviorTreeNear.UpdateSprites();
         stateMachine.SetTrigger("EndTurn");
         turn ^= 1;
         uiController.SetTurn(turn);

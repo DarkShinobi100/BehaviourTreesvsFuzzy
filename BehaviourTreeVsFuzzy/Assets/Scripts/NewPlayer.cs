@@ -36,8 +36,6 @@ public class NewPlayer : MonoBehaviour
     [SerializeField]
     private int lowAttackThreshold = 2;
 
-
-
     //user sliders
     [SerializeField]
     private Slider Health;

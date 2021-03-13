@@ -30,6 +30,7 @@ public class EnemyTurnState2 : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Debug.Log("Ending the " + EnemyNumber + " enemy's turn. \n *********************");
+
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here
