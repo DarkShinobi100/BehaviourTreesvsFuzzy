@@ -7,8 +7,11 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
     private NewPlayer playerData;
     private NewPlayer ownData;
 
-    private Animator Self;
-
+    private Animator animator;
+    [SerializeField]
+    private AudioClip[] SFX = new AudioClip[6];
+    private AudioSource audioPlayer;
+    
     //layer 3
     //Attack Buff Sequence
     public ActionNode AttackCheckNode;
@@ -100,7 +103,10 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
 
         //own animator
         //Get the Animator attached to the GameObject you are intending to animate.
-        Self = gameObject.GetComponent<Animator>();
+        animator = gameObject.GetComponent<Animator>();
+
+        //Get the AudioSource attached to the GameObject
+        audioPlayer = gameObject.GetComponent<AudioSource>();
     }
 
     public void SetPlayerData(NewPlayer human, NewPlayer ai)
@@ -129,7 +135,10 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
             ownData.Heal();
 
             //animation for healing
-            Self.SetTrigger("Heal");
+            animator.SetTrigger("Heal");
+
+            //sound effect
+            audioPlayer.PlayOneShot(SFX[0]);
         }//apply a buff
         else if (BuffSelectorNode.nodeState == NodeStates.SUCCESS)
         {
@@ -140,7 +149,9 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
                 ownData.increaseMana();
 
                 //animation for increasing mana
-                Self.SetTrigger("BuffMana");
+                animator.SetTrigger("BuffMana");
+                //sound effect
+                audioPlayer.PlayOneShot(SFX[1]);
             }
             else if (DefenceCheckSequence.nodeState == NodeStates.SUCCESS)
             {
@@ -149,7 +160,9 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
                 ownData.increaseDefence();
 
                 //animation for increasing Defence
-                Self.SetTrigger("BuffDefence");
+                animator.SetTrigger("BuffDefence");
+                //sound effect
+                audioPlayer.PlayOneShot(SFX[2]);
             }
             else if (AttackCheckSequence.nodeState == NodeStates.SUCCESS)
             {
@@ -158,7 +171,9 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
                 ownData.increaseAttack();
 
                 //animation for increasing Attack
-                Self.SetTrigger("BuffAttack");
+                animator.SetTrigger("BuffAttack");
+                //sound effect
+                audioPlayer.PlayOneShot(SFX[3]);
             }
         }//attack the player
         else if (AttackPlayerNode.nodeState == NodeStates.SUCCESS)
@@ -168,17 +183,21 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
             ownData.DecreaseAttack();
             ownData.DecreaseMana(1);
             //animation for attacking
-            Self.SetTrigger("Attack");
+            animator.SetTrigger("Attack");
+            //sound effect
+            audioPlayer.PlayOneShot(SFX[4]);
         }
         else
         {
-            Debug.Log("COULD NOT DECIDE");
+            Debug.Log("Default Attack");
             playerData.Damage(ownData.CurrentAttack);
             ownData.DecreaseAttack();
             ownData.DecreaseMana(1);
 
             //animation for attacking
-            Self.SetTrigger("Attack");
+            animator.SetTrigger("Attack");
+            //sound effect
+            audioPlayer.PlayOneShot(SFX[5]);
         }
         if (onTreeExecuted != null)
         {
