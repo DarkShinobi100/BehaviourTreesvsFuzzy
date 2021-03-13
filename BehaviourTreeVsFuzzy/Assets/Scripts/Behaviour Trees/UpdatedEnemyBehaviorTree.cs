@@ -176,7 +176,7 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
     {
         Debug.Log("The AI is thinking...");
         yield return new WaitForSeconds(2.5f);
-     
+       // yield return new WaitForEndOfFrame();
         //low health
         if (HealthCheckSequence.nodeState == NodeStates.SUCCESS)
         {
