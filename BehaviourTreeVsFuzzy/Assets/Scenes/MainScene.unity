@@ -2121,84 +2121,10 @@ MonoBehaviour:
   BuffSelectorNodeSprite: {fileID: 416595500}
   HealthCheckSequenceSprite: {fileID: 1814203647}
   rootNodeSprite: {fileID: 1557562186}
-  Fuzzy: 0
-  critical:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.0026245117
-      value: 1.005188
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.5013428
-      value: 0.0025978088
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  hurt:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1.0155945
-      inSlope: -1.0222478
-      outSlope: -1.0222478
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.9960327
-      value: -0.0025978088
-      inSlope: -1.0222478
-      outSlope: -1.0222478
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  healthy:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  FuzzyHealth: {x: 0, y: 0, z: 0}
-  FuzzyMana: {x: 0, y: 0, z: 0}
-  FuzzyDefence: {x: 0, y: 0, z: 0}
-  FuzzyAttack: {x: 0, y: 0, z: 0}
-  debug: 0
+  HealthResult: 0
+  ManaResult: 0
+  DefenceResult: 0
+  AttackResult: 0
 --- !u!1 &334191450
 GameObject:
   m_ObjectHideFlags: 0
@@ -2504,84 +2430,10 @@ MonoBehaviour:
   BuffSelectorNodeSprite: {fileID: 2025146056}
   HealthCheckSequenceSprite: {fileID: 762268692}
   rootNodeSprite: {fileID: 801570019}
-  Fuzzy: 0
-  critical:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.0026245117
-      value: 1.005188
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.5013428
-      value: 0.0025978088
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  hurt:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1.0155945
-      inSlope: -1.0222478
-      outSlope: -1.0222478
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.9960327
-      value: -0.0025978088
-      inSlope: -1.0222478
-      outSlope: -1.0222478
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  healthy:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  FuzzyHealth: {x: 0, y: 0, z: 0}
-  FuzzyMana: {x: 0, y: 0, z: 0}
-  FuzzyDefence: {x: 0, y: 0, z: 0}
-  FuzzyAttack: {x: 0, y: 0, z: 0}
-  debug: 0
+  HealthResult: 0
+  ManaResult: 0
+  DefenceResult: 0
+  AttackResult: 0
 --- !u!1 &410912891
 GameObject:
   m_ObjectHideFlags: 0

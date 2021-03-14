@@ -2,6 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+//university Library
+using FLS;
+using FLS.Rules;
+using FLS.MembershipFunctions;
 
 public class FuzzyBehaviourScript : MonoBehaviour
 {
@@ -99,31 +103,27 @@ public class FuzzyBehaviourScript : MonoBehaviour
 
 
     //Fuzzy
-    [SerializeField]
-    private bool Fuzzy;
-    [SerializeField]
-    private AnimationCurve critical;
-    [SerializeField]
-    private AnimationCurve hurt;
-    [SerializeField]
-    private AnimationCurve healthy;
+    private LinguisticVariable FuzzyHealth;
+    private LinguisticVariable FuzzyHealthRisk;
+    private IFuzzyEngine fuzzyHealthEngine;
 
-    private float criticalValue = 0f;
-    private float hurtValue = 0f;
-    private float healthyValue = 0f;
+    private LinguisticVariable FuzzyMana;
+    private LinguisticVariable FuzzyManaRisk;
+    private IFuzzyEngine fuzzyManaEngine;
+
+    private LinguisticVariable FuzzyDefence;
+    private LinguisticVariable FuzzyDefenceRisk;
+    private LinguisticVariable FuzzyAttack;
+    private LinguisticVariable FuzzyAttackRisk;
+
 
     [SerializeField]
-    private Vector3 FuzzyHealth = new Vector3(0.0f, 0.0f, 0.0f);
-    [SerializeField]
-    private Vector3 FuzzyMana = new Vector3(0.0f, 0.0f, 0.0f);
-    [SerializeField]
-    private Vector3 FuzzyDefence = new Vector3(0.0f, 0.0f, 0.0f);
-    [SerializeField]
-    private Vector3 FuzzyAttack = new Vector3(0.0f, 0.0f, 0.0f);
+    private double HealthResult;
 
 
     void Start()
     {
+        SetupFuzzy();
         //Check low health, if its low it will decide to heal
         ManaCheckHealthNode = new ActionNode(CanUseMana);
         HealthCheckNode = new ActionNode(CriticalHealthCheck);
@@ -193,7 +193,8 @@ public class FuzzyBehaviourScript : MonoBehaviour
 
 
     public void Evaluate()
-    {       
+    {
+        RunFuzzy();
         rootNode.Evaluate();
         StartCoroutine(Execute());
     }
@@ -543,6 +544,97 @@ public class FuzzyBehaviourScript : MonoBehaviour
     private void SetFailed(Image Sprite)
     {
         Sprite.color = new Color(255, 0, 0, 255);
+    }
+
+    private void SetupFuzzy()
+    {
+        Debug.Log("Setup Fuzzy!");
+        //define variables and membership functions(graphs)
+        //Variables for player data
+        FuzzyHealth = new LinguisticVariable("FuzzyHealth");
+        var highHealth = FuzzyHealth.MembershipFunctions.AddTrapezoid("high", -50, -50, -5, -1);
+        var midHealth = FuzzyHealth.MembershipFunctions.AddTrapezoid("mid", -5, -0.5, 0.5, 5);
+        var lowHealth = FuzzyHealth.MembershipFunctions.AddTrapezoid("low", 1, 5, 50, 50);
+
+        FuzzyMana = new LinguisticVariable("FuzzyMana");
+        var highMana = FuzzyMana.MembershipFunctions.AddTrapezoid("high", -50, -50, -5, -1);
+        var midMana = FuzzyMana.MembershipFunctions.AddTrapezoid("mid", -5, -0.5, 0.5, 5);
+        var lowMana = FuzzyMana.MembershipFunctions.AddTrapezoid("low", 1, 5, 50, 50);
+
+        FuzzyDefence = new LinguisticVariable("FuzzyDefence");
+        var highDefence = FuzzyDefence.MembershipFunctions.AddTrapezoid("high", -50, -50, -5, -1);
+        var midDefence = FuzzyDefence.MembershipFunctions.AddTrapezoid("mid", -5, -0.5, 0.5, 5);
+        var lowDefence = FuzzyDefence.MembershipFunctions.AddTrapezoid("low", 1, 5, 50, 50);
+
+        FuzzyAttack = new LinguisticVariable("FuzzyAttack");
+        var highAttack = FuzzyAttack.MembershipFunctions.AddTrapezoid("high", -50, -50, -5, -1);
+        var midAttack = FuzzyAttack.MembershipFunctions.AddTrapezoid("mid", -5, -0.5, 0.5, 5);
+        var lowAttack = FuzzyAttack.MembershipFunctions.AddTrapezoid("low", 1, 5, 50, 50);
+
+        FuzzyHealthRisk = new LinguisticVariable("Healthrisk");
+        var highHealthRisk = FuzzyHealthRisk.MembershipFunctions.AddTrapezoid("high", -50, -50, -5, -1);
+        var midHealthRisk = FuzzyHealthRisk.MembershipFunctions.AddTrapezoid("mid", -5, -0.5, 0.5, 5);
+        var lowHealthRisk = FuzzyHealthRisk.MembershipFunctions.AddTrapezoid("low", 1, 5, 50, 50);
+
+        FuzzyManaRisk = new LinguisticVariable("Manarisk");
+        var highManaRisk = FuzzyManaRisk.MembershipFunctions.AddTrapezoid("high", -50, -50, -5, -1);
+        var midManaRisk = FuzzyManaRisk.MembershipFunctions.AddTrapezoid("mid", -5, -0.5, 0.5, 5);
+        var lowManaRisk = FuzzyManaRisk.MembershipFunctions.AddTrapezoid("low", 1, 5, 50, 50);
+
+        FuzzyDefenceRisk = new LinguisticVariable("Defencerisk");
+        var highDefenceRisk = FuzzyDefenceRisk.MembershipFunctions.AddTrapezoid("high", -50, -50, -5, -1);
+        var midDefenceRisk = FuzzyDefenceRisk.MembershipFunctions.AddTrapezoid("mid", -5, -0.5, 0.5, 5);
+        var lowDefenceRisk = FuzzyDefenceRisk.MembershipFunctions.AddTrapezoid("low", 1, 5, 50, 50);
+
+        FuzzyAttackRisk = new LinguisticVariable("Attackrisk");
+        var highAttackRisk = FuzzyAttackRisk.MembershipFunctions.AddTrapezoid("high", -50, -50, -5, -1);
+        var midAttackRisk = FuzzyAttackRisk.MembershipFunctions.AddTrapezoid("mid", -5, -0.5, 0.5, 5);
+        var lowAttackRisk = FuzzyAttackRisk.MembershipFunctions.AddTrapezoid("low", 1, 5, 50, 50);
+
+        //Fuzzy engine from the library
+        fuzzyHealthEngine = new FuzzyEngineFactory().Default();
+
+        //create rules
+        //Health Rules
+        var rule1 = Rule.If(FuzzyHealth.Is(highHealth)).Then(FuzzyHealthRisk.Is(highHealthRisk));
+        var rule2 = Rule.If(FuzzyHealth.Is(midHealth)).Then(FuzzyHealthRisk.Is(midHealthRisk));
+        var rule3 = Rule.If(FuzzyHealth.Is(lowHealth)).Then(FuzzyHealthRisk.Is(lowHealthRisk));
+
+        //Mana Rules
+        var rule4 = Rule.If(FuzzyMana.Is(highMana)).Then(FuzzyManaRisk.Is(highManaRisk));
+        var rule5 = Rule.If(FuzzyMana.Is(midMana)).Then(FuzzyManaRisk.Is(midManaRisk));
+        var rule6 = Rule.If(FuzzyMana.Is(lowMana)).Then(FuzzyManaRisk.Is(lowManaRisk));
+
+        //Defence Rules
+        var rule7 = Rule.If(FuzzyDefence.Is(highDefence)).Then(FuzzyDefenceRisk.Is(highDefenceRisk));
+        var rule8 = Rule.If(FuzzyDefence.Is(midDefence)).Then(FuzzyDefenceRisk.Is(midDefenceRisk));
+        var rule9 = Rule.If(FuzzyDefence.Is(lowDefence)).Then(FuzzyDefenceRisk.Is(lowDefenceRisk));
+
+        //Attack Rules
+        var rule10 = Rule.If(FuzzyAttack.Is(highAttack)).Then(FuzzyAttackRisk.Is(highAttackRisk));
+        var rule11 = Rule.If(FuzzyAttack.Is(midAttack)).Then(FuzzyAttackRisk.Is(midAttackRisk));
+        var rule12 = Rule.If(FuzzyAttack.Is(lowAttack)).Then(FuzzyAttackRisk.Is(lowAttackRisk));
+
+        //add rules to engine
+        fuzzyHealthEngine.Rules.Add(rule1, rule2, rule3,rule4, rule5,rule6,rule7,rule8,rule9,rule10,rule11,rule12);
+    }
+
+    private void RunFuzzy()
+    {
+
+        //fuzzy results
+        // Convert position of box to value between 0 and 100
+        //double result = engine.Defuzzify(new { distance = (double)this.transform.position.x });
+        double temphealth = (ownData.CurrentHealth / ownData.MaxHealth) * 100;
+       // double tempMana = (ownData.CurrentMana / ownData.MaxMana) * 100;
+
+        HealthResult = fuzzyHealthEngine.Defuzzify(
+            new {FuzzyHealth = (double)ownData.CurrentHealth,
+            FuzzyMana = (double)ownData.CurrentMana,
+            FuzzyDefence = (double)ownData.CurrentDefence,
+            FuzzyAttack = (double)ownData.CurrentAttack
+            });
+        Debug.Log("Run Fuzzy!" + HealthResult.ToString());        
     }
 
 }

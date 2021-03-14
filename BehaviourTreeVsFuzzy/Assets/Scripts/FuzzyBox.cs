@@ -44,7 +44,6 @@ public class FuzzyBox : MonoBehaviour {
 		{
             // Convert position of box to value between 0 and 100
             double result = engine.Defuzzify(new { distance = (double)this.transform.position.x });
-            // double result2 = engine.Defuzzify(new { distance = (double)this.transform.position.x });
             //double result = 0.0;
 
 			Rigidbody rigidbody = GetComponent<Rigidbody>();

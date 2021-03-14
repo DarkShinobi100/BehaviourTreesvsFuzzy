@@ -6,35 +6,35 @@ public class NewPlayer : MonoBehaviour
     private Animator Self;
 
     [SerializeField]
-    private int maxHealth = 20;
+    private float maxHealth = 20;
 
     [SerializeField]
-    private int currentHealth;
+    private float currentHealth;
 
     [SerializeField]
-    private int maxMana = 20;
+    private float maxMana = 20;
 
     [SerializeField]
-    private int currentMana;
+    private float currentMana;
 
     [SerializeField]
-    private int AttackValue;
+    private float AttackValue;
 
     [SerializeField]
-    private int DefenceValue;
+    private float DefenceValue;
 
     [SerializeField]
-    private int MagicAttackValue;
+    private float MagicAttackValue;
 
     //State rules for AI
     [SerializeField]
-    private int lowHealthThreshold = 7;
+    private float lowHealthThreshold = 7;
     [SerializeField]
-    private int lowManaThreshold = 5;
+    private float lowManaThreshold = 5;
     [SerializeField]
-    private int lowDefenceThreshold = 3;
+    private float lowDefenceThreshold = 3;
     [SerializeField]
-    private int lowAttackThreshold = 2;
+    private float lowAttackThreshold = 2;
 
     //user sliders
     [SerializeField]
@@ -57,39 +57,39 @@ public class NewPlayer : MonoBehaviour
     private bool UpdateDuring = false;
 
     [Header("Ability Parameters")]
-    private int minHealAmount = 2;
-    private int maxHealAmount = 5;
+    private float minHealAmount = 2;
+    private float maxHealAmount = 5;
 
     //player values
-    public int CurrentHealth
+    public float CurrentHealth
     {
         get { return currentHealth; }
     }
 
-    public int MaxHealth
+    public float MaxHealth
     {
         get { return maxHealth; }
     }
 
-    public int CurrentMana
+    public float CurrentMana
     {
         get { return currentMana; }
     }
 
-    public int MaxMana
+    public float MaxMana
     {
         get { return maxMana; }
     }
 
-    public int CurrentDefence
+    public float CurrentDefence
     {
         get { return DefenceValue; }
     }
-    public int CurrentAttack
+    public float CurrentAttack
     {
         get { return AttackValue; }
     }
-    public int CurrentMagicAttack
+    public float CurrentMagicAttack
     {
         get { return MagicAttackValue; }
     }
@@ -125,15 +125,15 @@ public class NewPlayer : MonoBehaviour
         DefenceValue = 5;
 
         //stats from sliders
-        currentHealth = (int)Health.value;
-        currentMana = (int)Mana.value;
-        AttackValue = (int)Attack.value;
-        DefenceValue = (int)Defence.value;
+        currentHealth = (float)Health.value;
+        currentMana = (float)Mana.value;
+        AttackValue = (float)Attack.value;
+        DefenceValue = (float)Defence.value;
 
-        lowHealthThreshold = (int)MinHealth.value;
-        lowManaThreshold = (int)MinMana.value;
-        lowAttackThreshold = (int)MinAttack.value;
-        lowDefenceThreshold = (int)MinDefence.value;
+        lowHealthThreshold = (float)MinHealth.value;
+        lowManaThreshold = (float)MinMana.value;
+        lowAttackThreshold = (float)MinAttack.value;
+        lowDefenceThreshold = (float)MinDefence.value;
 
         //own animator
         //Get the Animator attached to the GameObject you are intending to animate.
@@ -145,10 +145,10 @@ public class NewPlayer : MonoBehaviour
         if (UpdateDuring)
         {
             //stats from sliders   
-            lowHealthThreshold = (int)MinHealth.value;
-            lowManaThreshold = (int)MinMana.value;
-            lowAttackThreshold = (int)MinAttack.value;
-            lowDefenceThreshold = (int)MinDefence.value;
+            lowHealthThreshold = (float)MinHealth.value;
+            lowManaThreshold = (float)MinMana.value;
+            lowAttackThreshold = (float)MinAttack.value;
+            lowDefenceThreshold = (float)MinDefence.value;
         }
     }
 
@@ -157,16 +157,16 @@ public class NewPlayer : MonoBehaviour
         UpdateDuring = true;
     }
 
-    public int Heal()
+    public float Heal()
     {
-        int healAmount = Random.Range(minHealAmount, maxHealAmount);
+        float healAmount = Random.Range(minHealAmount, maxHealAmount);
         currentHealth += healAmount;
         return currentHealth;
     }
 
-    public int Damage(int receivedDamage)
+    public float Damage(float receivedDamage)
     {
-        int damageAmount = receivedDamage - DefenceValue;
+        float damageAmount = receivedDamage - DefenceValue;
         DefenceValue--;
         if (DefenceValue < 0)
         {
@@ -186,25 +186,25 @@ public class NewPlayer : MonoBehaviour
         return currentHealth;
     }
 
-    public int increaseAttack()
+    public float increaseAttack()
     {
         AttackValue += Random.Range(1, 5);
         return AttackValue;
     }
 
-    public int increaseDefence()
+    public float increaseDefence()
     {
         DefenceValue += Random.Range(1, 5);
         return DefenceValue;
     }
 
-    public int increaseMagicAttack()
+    public float increaseMagicAttack()
     {
         MagicAttackValue++;
         return MagicAttackValue;
     }
 
-    public int increaseMana()
+    public float increaseMana()
     {
         currentMana += Random.Range(5,10);
         if (currentMana > maxMana)
@@ -214,7 +214,7 @@ public class NewPlayer : MonoBehaviour
         return currentMana;
     }
 
-    public int DecreaseMana(int cost)
+    public float DecreaseMana(float cost)
     {
         currentMana = currentMana - cost;
         if(currentMana <0)
@@ -224,7 +224,7 @@ public class NewPlayer : MonoBehaviour
         return currentMana;
     }
 
-    public int DecreaseAttack()
+    public float DecreaseAttack()
     {
         --AttackValue;
         if (AttackValue < 0)
