@@ -65,10 +65,22 @@ public class NewPlayer : MonoBehaviour
     {
         get { return currentHealth; }
     }
+
+    public int MaxHealth
+    {
+        get { return maxHealth; }
+    }
+
     public int CurrentMana
     {
         get { return currentMana; }
     }
+
+    public int MaxMana
+    {
+        get { return maxMana; }
+    }
+
     public int CurrentDefence
     {
         get { return DefenceValue; }

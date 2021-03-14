@@ -97,6 +97,31 @@ public class FuzzyBehaviourScript : MonoBehaviour
 
     public delegate void NodePassed(string trigger);
 
+
+    //Fuzzy
+    [SerializeField]
+    private bool Fuzzy;
+    [SerializeField]
+    private AnimationCurve critical;
+    [SerializeField]
+    private AnimationCurve hurt;
+    [SerializeField]
+    private AnimationCurve healthy;
+
+    private float criticalValue = 0f;
+    private float hurtValue = 0f;
+    private float healthyValue = 0f;
+
+    [SerializeField]
+    private Vector3 FuzzyHealth = new Vector3(0.0f, 0.0f, 0.0f);
+    [SerializeField]
+    private Vector3 FuzzyMana = new Vector3(0.0f, 0.0f, 0.0f);
+    [SerializeField]
+    private Vector3 FuzzyDefence = new Vector3(0.0f, 0.0f, 0.0f);
+    [SerializeField]
+    private Vector3 FuzzyAttack = new Vector3(0.0f, 0.0f, 0.0f);
+
+
     void Start()
     {
         //Check low health, if its low it will decide to heal
@@ -166,8 +191,9 @@ public class FuzzyBehaviourScript : MonoBehaviour
         ownData = ai;
     }
 
+
     public void Evaluate()
-    {
+    {       
         rootNode.Evaluate();
         StartCoroutine(Execute());
     }
@@ -518,4 +544,5 @@ public class FuzzyBehaviourScript : MonoBehaviour
     {
         Sprite.color = new Color(255, 0, 0, 255);
     }
+
 }
