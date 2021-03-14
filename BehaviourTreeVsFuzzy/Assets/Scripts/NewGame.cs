@@ -9,6 +9,12 @@ public class NewGame : MonoBehaviour
     [SerializeField]
     private UpdatedEnemyBehaviorTree enemyBehaviorTreeNear;
     [SerializeField]
+    bool Fuzzy = false;
+    [SerializeField]
+    private FuzzyBehaviourScript FuzzyenemyBehaviorTreeFar;
+    [SerializeField]
+    private FuzzyBehaviourScript FuzzyenemyBehaviorTreeNear;
+    [SerializeField]
     private NewPlayer humanPlayer;
     [SerializeField]
     private NewPlayer aiPlayer;
@@ -18,20 +24,45 @@ public class NewGame : MonoBehaviour
 
     private void Awake()
     {
-        enemyBehaviorTreeFar.SetPlayerData(humanPlayer, aiPlayer);
-        enemyBehaviorTreeFar.onTreeExecuted += EndTurn;
-        enemyBehaviorTreeNear.SetPlayerData(aiPlayer, humanPlayer);
-        enemyBehaviorTreeNear.onTreeExecuted += EndTurn;
+        if (!Fuzzy)
+        {
+            enemyBehaviorTreeFar.SetPlayerData(humanPlayer, aiPlayer);
+            enemyBehaviorTreeFar.onTreeExecuted += EndTurn;
+            enemyBehaviorTreeNear.SetPlayerData(aiPlayer, humanPlayer);
+            enemyBehaviorTreeNear.onTreeExecuted += EndTurn;
+        }
+        else
+        {
+            FuzzyenemyBehaviorTreeFar.SetPlayerData(humanPlayer, aiPlayer);
+            FuzzyenemyBehaviorTreeFar.onTreeExecuted += EndTurn;
+            FuzzyenemyBehaviorTreeNear.SetPlayerData(aiPlayer, humanPlayer);
+            FuzzyenemyBehaviorTreeNear.onTreeExecuted += EndTurn;
+        }
+
     }
 
     public void EvaluateAITree()
     {
-        enemyBehaviorTreeFar.Evaluate();
+        if (!Fuzzy)
+        {
+            enemyBehaviorTreeFar.Evaluate();
+        }
+        else
+        {
+            FuzzyenemyBehaviorTreeFar.Evaluate();
+        }
     }
 
     public void EvaluateAITree2()
     {
-        enemyBehaviorTreeNear.Evaluate();
+        if (!Fuzzy)
+        {
+            enemyBehaviorTreeNear.Evaluate();
+        }
+        else
+        {
+            FuzzyenemyBehaviorTreeNear.Evaluate();
+        }
     }
 
     private void EndTurn()
@@ -42,8 +73,16 @@ public class NewGame : MonoBehaviour
             uiController.EndGame();
             return;
         }
-        enemyBehaviorTreeFar.UpdateSprites();
-        enemyBehaviorTreeNear.UpdateSprites();
+        if(!Fuzzy)
+        {
+            enemyBehaviorTreeFar.UpdateSprites();
+            enemyBehaviorTreeNear.UpdateSprites();
+        }
+        else
+        {
+            FuzzyenemyBehaviorTreeFar.UpdateSprites();
+            FuzzyenemyBehaviorTreeNear.UpdateSprites();
+        }
         stateMachine.SetTrigger("EndTurn");
         turn ^= 1;
         uiController.SetTurn(turn);

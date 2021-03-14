@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class fuzzyBehaviourScript : MonoBehaviour
+public class FuzzyBehaviourScript : MonoBehaviour
 {
     private NewPlayer playerData;
     private NewPlayer ownData;

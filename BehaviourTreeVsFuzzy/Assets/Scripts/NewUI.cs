@@ -19,6 +19,12 @@ public class NewUI : MonoBehaviour
     [SerializeField]
     private UpdatedEnemyBehaviorTree enemyBehaviorTreeNear;
     [SerializeField]
+    bool Fuzzy = false;
+    [SerializeField]
+    private FuzzyBehaviourScript FuzzyenemyBehaviorTreeFar;
+    [SerializeField]
+    private FuzzyBehaviourScript FuzzyenemyBehaviorTreeNear;
+    [SerializeField]
     private Text turnText;
     [SerializeField]
     private Text playerHealthText;
@@ -79,16 +85,33 @@ public class NewUI : MonoBehaviour
             turnText.text = playerTurnMessage;
             playerHealthText.text = ActionMessage;
             enemyHealthText.text = WaitMessage;
-            enemyBehaviorTreeFar.ResetSprites();
-            enemyBehaviorTreeNear.UpdateSprites();
+
+            if (!Fuzzy)
+            {
+                enemyBehaviorTreeFar.ResetSprites();
+                enemyBehaviorTreeNear.UpdateSprites();
+            }
+            else
+            {
+                FuzzyenemyBehaviorTreeFar.ResetSprites();
+                FuzzyenemyBehaviorTreeNear.UpdateSprites();
+            }
         }
         else
         {
             turnText.text = aiTurnMessage;
             enemyHealthText.text = ActionMessage;
             playerHealthText.text = WaitMessage;
-            enemyBehaviorTreeNear.ResetSprites();
-            enemyBehaviorTreeFar.UpdateSprites();
+            if(!Fuzzy)
+            {
+                enemyBehaviorTreeNear.ResetSprites();
+                enemyBehaviorTreeFar.UpdateSprites();
+            }
+            else
+            {
+                FuzzyenemyBehaviorTreeNear.ResetSprites();
+                FuzzyenemyBehaviorTreeFar.UpdateSprites();
+            }
         }
     }
 
