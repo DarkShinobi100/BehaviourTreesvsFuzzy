@@ -571,6 +571,12 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &91527301 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114509080029890832, guid: 40493b15c6a3de243b176548449bb2c8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1231099042}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &102341607
 GameObject:
   m_ObjectHideFlags: 0
@@ -2076,6 +2082,123 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &318930814 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1154913805207874, guid: 40493b15c6a3de243b176548449bb2c8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1231099042}
+--- !u!114 &318930815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 318930814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40fcf38359f938c4d86cad5eec89e05d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SFX:
+  - {fileID: 8300000, guid: d8771a0d62f651a4a8f5725cd3611784, type: 3}
+  - {fileID: 8300000, guid: 91d69dffd579ecf43b15a3283a0b3c61, type: 3}
+  - {fileID: 8300000, guid: b8fb2dd18a5b6c74ea2f1644d14ae7eb, type: 3}
+  - {fileID: 8300000, guid: 3ebad4205f54a454cb315b876896301f, type: 3}
+  - {fileID: 8300000, guid: 92103a6442046474e9cd0f8a9236543a, type: 3}
+  - {fileID: 8300000, guid: 11b2a80a0bc3e504fafd1f147905776c, type: 3}
+  StateText: {fileID: 1713815946}
+  AttackCheckNodeSprite: {fileID: 2108714499}
+  AttackValueCheckNodeSprite: {fileID: 587474948}
+  DefenceCheckNodeSprite: {fileID: 1675538535}
+  DefenceValueCheckNodeSprite: {fileID: 1346411681}
+  ManaCheckNodeSprite: {fileID: 522611314}
+  ManaValueCheckNodeSprite: {fileID: 1637404710}
+  AttackCheckSequenceSprite: {fileID: 1570596330}
+  DefenceCheckSequenceSprite: {fileID: 2057541521}
+  ManaCheckSequenceSprite: {fileID: 1450841923}
+  ManaCheckHealthNodeSprite: {fileID: 513627120}
+  HealthCheckNodeSprite: {fileID: 672776482}
+  AttackPlayerNodeSprite: {fileID: 2116182033}
+  BuffSelectorNodeSprite: {fileID: 416595500}
+  HealthCheckSequenceSprite: {fileID: 1814203647}
+  rootNodeSprite: {fileID: 1557562186}
+  Fuzzy: 0
+  critical:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0026245117
+      value: 1.005188
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5013428
+      value: 0.0025978088
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  hurt:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.0155945
+      inSlope: -1.0222478
+      outSlope: -1.0222478
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9960327
+      value: -0.0025978088
+      inSlope: -1.0222478
+      outSlope: -1.0222478
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  healthy:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  FuzzyHealth: {x: 0, y: 0, z: 0}
+  FuzzyMana: {x: 0, y: 0, z: 0}
+  FuzzyDefence: {x: 0, y: 0, z: 0}
+  FuzzyAttack: {x: 0, y: 0, z: 0}
+  debug: 0
 --- !u!1 &334191450
 GameObject:
   m_ObjectHideFlags: 0
@@ -2342,6 +2465,123 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 384301098}
   m_CullTransparentMesh: 0
+--- !u!1 &404446818 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1376774548030200, guid: 40493b15c6a3de243b176548449bb2c8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1231099042}
+--- !u!114 &404446824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 404446818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40fcf38359f938c4d86cad5eec89e05d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SFX:
+  - {fileID: 8300000, guid: d8771a0d62f651a4a8f5725cd3611784, type: 3}
+  - {fileID: 8300000, guid: 91d69dffd579ecf43b15a3283a0b3c61, type: 3}
+  - {fileID: 8300000, guid: b8fb2dd18a5b6c74ea2f1644d14ae7eb, type: 3}
+  - {fileID: 8300000, guid: 3ebad4205f54a454cb315b876896301f, type: 3}
+  - {fileID: 8300000, guid: 92103a6442046474e9cd0f8a9236543a, type: 3}
+  - {fileID: 8300000, guid: 11b2a80a0bc3e504fafd1f147905776c, type: 3}
+  StateText: {fileID: 91527301}
+  AttackCheckNodeSprite: {fileID: 231293711}
+  AttackValueCheckNodeSprite: {fileID: 1701662765}
+  DefenceCheckNodeSprite: {fileID: 478723306}
+  DefenceValueCheckNodeSprite: {fileID: 504162115}
+  ManaCheckNodeSprite: {fileID: 1425912579}
+  ManaValueCheckNodeSprite: {fileID: 334191452}
+  AttackCheckSequenceSprite: {fileID: 1954870932}
+  DefenceCheckSequenceSprite: {fileID: 1031553749}
+  ManaCheckSequenceSprite: {fileID: 77630408}
+  ManaCheckHealthNodeSprite: {fileID: 1775147301}
+  HealthCheckNodeSprite: {fileID: 984471684}
+  AttackPlayerNodeSprite: {fileID: 821230201}
+  BuffSelectorNodeSprite: {fileID: 2025146056}
+  HealthCheckSequenceSprite: {fileID: 762268692}
+  rootNodeSprite: {fileID: 801570019}
+  Fuzzy: 0
+  critical:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0026245117
+      value: 1.005188
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5013428
+      value: 0.0025978088
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  hurt:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.0155945
+      inSlope: -1.0222478
+      outSlope: -1.0222478
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9960327
+      value: -0.0025978088
+      inSlope: -1.0222478
+      outSlope: -1.0222478
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  healthy:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  FuzzyHealth: {x: 0, y: 0, z: 0}
+  FuzzyMana: {x: 0, y: 0, z: 0}
+  FuzzyDefence: {x: 0, y: 0, z: 0}
+  FuzzyAttack: {x: 0, y: 0, z: 0}
+  debug: 0
 --- !u!1 &410912891
 GameObject:
   m_ObjectHideFlags: 0
@@ -4250,7 +4490,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1062744963}
+      - m_Target: {fileID: 1988939281}
         m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
@@ -7216,11 +7456,6 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1035009959}
   m_CullTransparentMesh: 0
---- !u!1 &1062744963 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1004678031980846, guid: 40493b15c6a3de243b176548449bb2c8,
-    type: 2}
-  m_PrefabInternal: {fileID: 1603050925}
 --- !u!1 &1068518978
 GameObject:
   m_ObjectHideFlags: 0
@@ -8070,6 +8305,417 @@ RectTransform:
   m_AnchoredPosition: {x: -5, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &1231099042
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4056526931345624, guid: 40493b15c6a3de243b176548449bb2c8, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -1.2611451
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056526931345624, guid: 40493b15c6a3de243b176548449bb2c8, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.8320528
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056526931345624, guid: 40493b15c6a3de243b176548449bb2c8, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 55.47166
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056526931345624, guid: 40493b15c6a3de243b176548449bb2c8, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056526931345624, guid: 40493b15c6a3de243b176548449bb2c8, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056526931345624, guid: 40493b15c6a3de243b176548449bb2c8, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056526931345624, guid: 40493b15c6a3de243b176548449bb2c8, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056526931345624, guid: 40493b15c6a3de243b176548449bb2c8, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114180461863109818, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: AttackCheckNodeSprite
+      value: 
+      objectReference: {fileID: 231293711}
+    - target: {fileID: 114180461863109818, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: AttackValueCheckNodeSprite
+      value: 
+      objectReference: {fileID: 1701662765}
+    - target: {fileID: 114180461863109818, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: DefenceCheckNodeSprite
+      value: 
+      objectReference: {fileID: 478723306}
+    - target: {fileID: 114180461863109818, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: DefenceValueCheckNodeSprite
+      value: 
+      objectReference: {fileID: 504162115}
+    - target: {fileID: 114180461863109818, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: ManaCheckNodeSprite
+      value: 
+      objectReference: {fileID: 1425912579}
+    - target: {fileID: 114180461863109818, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: ManaValueCheckNodeSprite
+      value: 
+      objectReference: {fileID: 334191452}
+    - target: {fileID: 114180461863109818, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: AttackCheckSequenceSprite
+      value: 
+      objectReference: {fileID: 1954870932}
+    - target: {fileID: 114180461863109818, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: DefenceCheckSequenceSprite
+      value: 
+      objectReference: {fileID: 1031553749}
+    - target: {fileID: 114180461863109818, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: ManaCheckSequenceSprite
+      value: 
+      objectReference: {fileID: 77630408}
+    - target: {fileID: 114180461863109818, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: ManaCheckHealthNodeSprite
+      value: 
+      objectReference: {fileID: 984471684}
+    - target: {fileID: 114180461863109818, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: HealthCheckNodeSprite
+      value: 
+      objectReference: {fileID: 1775147301}
+    - target: {fileID: 114180461863109818, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: AttackPlayerNodeSprite
+      value: 
+      objectReference: {fileID: 821230201}
+    - target: {fileID: 114180461863109818, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: BuffSelectorNodeSprite
+      value: 
+      objectReference: {fileID: 2025146056}
+    - target: {fileID: 114180461863109818, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: HealthCheckSequenceSprite
+      value: 
+      objectReference: {fileID: 762268692}
+    - target: {fileID: 114180461863109818, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: rootNodeSprite
+      value: 
+      objectReference: {fileID: 801570019}
+    - target: {fileID: 114916373982311304, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: Health
+      value: 
+      objectReference: {fileID: 681468402}
+    - target: {fileID: 114916373982311304, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: Mana
+      value: 
+      objectReference: {fileID: 1644775731}
+    - target: {fileID: 114916373982311304, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: Attack
+      value: 
+      objectReference: {fileID: 638604479}
+    - target: {fileID: 114916373982311304, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: Defence
+      value: 
+      objectReference: {fileID: 1673881216}
+    - target: {fileID: 114916373982311304, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: MinHealth
+      value: 
+      objectReference: {fileID: 584362085}
+    - target: {fileID: 114916373982311304, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: MinMana
+      value: 
+      objectReference: {fileID: 154808880}
+    - target: {fileID: 114916373982311304, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: MinAttack
+      value: 
+      objectReference: {fileID: 1808695795}
+    - target: {fileID: 114916373982311304, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: MinDefence
+      value: 
+      objectReference: {fileID: 1122671107}
+    - target: {fileID: 114929427837989608, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: Health
+      value: 
+      objectReference: {fileID: 805764556}
+    - target: {fileID: 114929427837989608, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: Mana
+      value: 
+      objectReference: {fileID: 1903335190}
+    - target: {fileID: 114929427837989608, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: Attack
+      value: 
+      objectReference: {fileID: 1802890543}
+    - target: {fileID: 114929427837989608, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: Defence
+      value: 
+      objectReference: {fileID: 1853059805}
+    - target: {fileID: 114929427837989608, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: MinHealth
+      value: 
+      objectReference: {fileID: 358279054}
+    - target: {fileID: 114929427837989608, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: MinMana
+      value: 
+      objectReference: {fileID: 798513408}
+    - target: {fileID: 114929427837989608, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: MinAttack
+      value: 
+      objectReference: {fileID: 2025646017}
+    - target: {fileID: 114929427837989608, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: MinDefence
+      value: 
+      objectReference: {fileID: 799799633}
+    - target: {fileID: 114493897944877286, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 615452399}
+    - target: {fileID: 114493897944877286, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1825893297}
+    - target: {fileID: 114812014255312714, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 615452399}
+    - target: {fileID: 114812014255312714, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1825893297}
+    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: NearHealth
+      value: 
+      objectReference: {fileID: 263418625}
+    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: NearMana
+      value: 
+      objectReference: {fileID: 1813046590}
+    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: NearAttack
+      value: 
+      objectReference: {fileID: 1863055109}
+    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: NearDefence
+      value: 
+      objectReference: {fileID: 1844103153}
+    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: FarHealth
+      value: 
+      objectReference: {fileID: 2132670663}
+    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: FarMana
+      value: 
+      objectReference: {fileID: 636442833}
+    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: FarAttack
+      value: 
+      objectReference: {fileID: 1948461903}
+    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: FarDefence
+      value: 
+      objectReference: {fileID: 852317351}
+    - target: {fileID: 114496296701121762, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 615452399}
+    - target: {fileID: 114496296701121762, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 703378640}
+    - target: {fileID: 114139330876811808, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 615452399}
+    - target: {fileID: 114139330876811808, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 703378640}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: AttackCheckNodeSprite
+      value: 
+      objectReference: {fileID: 2108714499}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: AttackValueCheckNodeSprite
+      value: 
+      objectReference: {fileID: 587474948}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: DefenceCheckNodeSprite
+      value: 
+      objectReference: {fileID: 1675538535}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: DefenceValueCheckNodeSprite
+      value: 
+      objectReference: {fileID: 1346411681}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: ManaCheckNodeSprite
+      value: 
+      objectReference: {fileID: 522611314}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: ManaValueCheckNodeSprite
+      value: 
+      objectReference: {fileID: 1637404710}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: AttackCheckSequenceSprite
+      value: 
+      objectReference: {fileID: 1570596330}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: DefenceCheckSequenceSprite
+      value: 
+      objectReference: {fileID: 2057541521}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: ManaCheckSequenceSprite
+      value: 
+      objectReference: {fileID: 1450841923}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: ManaCheckHealthNodeSprite
+      value: 
+      objectReference: {fileID: 672776482}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: HealthCheckNodeSprite
+      value: 
+      objectReference: {fileID: 513627120}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: AttackPlayerNodeSprite
+      value: 
+      objectReference: {fileID: 2116182033}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: BuffSelectorNodeSprite
+      value: 
+      objectReference: {fileID: 416595500}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: HealthCheckSequenceSprite
+      value: 
+      objectReference: {fileID: 1814203647}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: rootNodeSprite
+      value: 
+      objectReference: {fileID: 1557562186}
+    - target: {fileID: 114991065568111386, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 435383990}
+    - target: {fileID: 114170142695511002, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 435383990}
+    - target: {fileID: 114809436683909818, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 72075530}
+    - target: {fileID: 114887983377434414, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 72075530}
+    - target: {fileID: 1004678031980846, guid: 40493b15c6a3de243b176548449bb2c8, type: 2}
+      propertyPath: m_Name
+      value: FuzzyAIGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 114670897623506120, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: FuzzyenemyBehaviorTreeFar
+      value: 
+      objectReference: {fileID: 404446824}
+    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: FuzzyenemyBehaviorTreeFar
+      value: 
+      objectReference: {fileID: 404446824}
+    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: FuzzyenemyBehaviorTreeNear
+      value: 
+      objectReference: {fileID: 318930815}
+    - target: {fileID: 114670897623506120, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: FuzzyenemyBehaviorTreeNear
+      value: 
+      objectReference: {fileID: 318930815}
+    - target: {fileID: 114670897623506120, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: Fuzzy
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: Fuzzy
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 40493b15c6a3de243b176548449bb2c8, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!1 &1237668965
 GameObject:
   m_ObjectHideFlags: 0
@@ -10244,261 +10890,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 114887983377434414, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 72075530}
-    - target: {fileID: 114809436683909818, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 72075530}
-    - target: {fileID: 114170142695511002, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 435383990}
-    - target: {fileID: 114991065568111386, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 435383990}
-    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: AttackCheckNodeSprite
-      value: 
-      objectReference: {fileID: 2108714499}
-    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: AttackValueCheckNodeSprite
-      value: 
-      objectReference: {fileID: 587474948}
-    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: DefenceCheckNodeSprite
-      value: 
-      objectReference: {fileID: 1675538535}
-    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: DefenceValueCheckNodeSprite
-      value: 
-      objectReference: {fileID: 1346411681}
-    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: ManaCheckNodeSprite
-      value: 
-      objectReference: {fileID: 522611314}
-    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: ManaValueCheckNodeSprite
-      value: 
-      objectReference: {fileID: 1637404710}
-    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: AttackCheckSequenceSprite
-      value: 
-      objectReference: {fileID: 1570596330}
-    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: DefenceCheckSequenceSprite
-      value: 
-      objectReference: {fileID: 2057541521}
-    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: ManaCheckSequenceSprite
-      value: 
-      objectReference: {fileID: 1450841923}
-    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: ManaCheckHealthNodeSprite
-      value: 
-      objectReference: {fileID: 672776482}
-    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: HealthCheckNodeSprite
-      value: 
-      objectReference: {fileID: 513627120}
-    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: AttackPlayerNodeSprite
-      value: 
-      objectReference: {fileID: 2116182033}
-    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: BuffSelectorNodeSprite
-      value: 
-      objectReference: {fileID: 416595500}
-    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: HealthCheckSequenceSprite
-      value: 
-      objectReference: {fileID: 1814203647}
-    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: rootNodeSprite
-      value: 
-      objectReference: {fileID: 1557562186}
-    - target: {fileID: 114139330876811808, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 615452399}
-    - target: {fileID: 114139330876811808, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 703378640}
-    - target: {fileID: 114496296701121762, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 615452399}
-    - target: {fileID: 114496296701121762, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 703378640}
-    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: NearHealth
-      value: 
-      objectReference: {fileID: 263418625}
-    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: NearMana
-      value: 
-      objectReference: {fileID: 1813046590}
-    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: NearAttack
-      value: 
-      objectReference: {fileID: 1863055109}
-    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: NearDefence
-      value: 
-      objectReference: {fileID: 1844103153}
-    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: FarHealth
-      value: 
-      objectReference: {fileID: 2132670663}
-    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: FarMana
-      value: 
-      objectReference: {fileID: 636442833}
-    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: FarAttack
-      value: 
-      objectReference: {fileID: 1948461903}
-    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: FarDefence
-      value: 
-      objectReference: {fileID: 852317351}
-    - target: {fileID: 114812014255312714, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 615452399}
-    - target: {fileID: 114812014255312714, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 1825893297}
-    - target: {fileID: 114493897944877286, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 615452399}
-    - target: {fileID: 114493897944877286, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 1825893297}
-    - target: {fileID: 114929427837989608, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: Health
-      value: 
-      objectReference: {fileID: 805764556}
-    - target: {fileID: 114929427837989608, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: Mana
-      value: 
-      objectReference: {fileID: 1903335190}
-    - target: {fileID: 114929427837989608, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: Attack
-      value: 
-      objectReference: {fileID: 1802890543}
-    - target: {fileID: 114929427837989608, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: Defence
-      value: 
-      objectReference: {fileID: 1853059805}
-    - target: {fileID: 114929427837989608, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: MinHealth
-      value: 
-      objectReference: {fileID: 358279054}
-    - target: {fileID: 114929427837989608, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: MinMana
-      value: 
-      objectReference: {fileID: 798513408}
-    - target: {fileID: 114929427837989608, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: MinAttack
-      value: 
-      objectReference: {fileID: 2025646017}
-    - target: {fileID: 114929427837989608, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: MinDefence
-      value: 
-      objectReference: {fileID: 799799633}
-    - target: {fileID: 114916373982311304, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: Health
-      value: 
-      objectReference: {fileID: 681468402}
-    - target: {fileID: 114916373982311304, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: Mana
-      value: 
-      objectReference: {fileID: 1644775731}
-    - target: {fileID: 114916373982311304, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: Attack
-      value: 
-      objectReference: {fileID: 638604479}
-    - target: {fileID: 114916373982311304, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: Defence
-      value: 
-      objectReference: {fileID: 1673881216}
-    - target: {fileID: 114916373982311304, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: MinHealth
-      value: 
-      objectReference: {fileID: 584362085}
-    - target: {fileID: 114916373982311304, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: MinMana
-      value: 
-      objectReference: {fileID: 154808880}
-    - target: {fileID: 114916373982311304, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: MinAttack
-      value: 
-      objectReference: {fileID: 1808695795}
-    - target: {fileID: 114916373982311304, guid: 40493b15c6a3de243b176548449bb2c8,
-        type: 2}
-      propertyPath: MinDefence
-      value: 
-      objectReference: {fileID: 1122671107}
     - target: {fileID: 114180461863109818, guid: 40493b15c6a3de243b176548449bb2c8,
         type: 2}
       propertyPath: AttackCheckNodeSprite
@@ -10574,10 +10965,261 @@ Prefab:
       propertyPath: rootNodeSprite
       value: 
       objectReference: {fileID: 801570019}
-    - target: {fileID: 1004678031980846, guid: 40493b15c6a3de243b176548449bb2c8, type: 2}
-      propertyPath: m_Name
-      value: AIGame
-      objectReference: {fileID: 0}
+    - target: {fileID: 114916373982311304, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: Health
+      value: 
+      objectReference: {fileID: 681468402}
+    - target: {fileID: 114916373982311304, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: Mana
+      value: 
+      objectReference: {fileID: 1644775731}
+    - target: {fileID: 114916373982311304, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: Attack
+      value: 
+      objectReference: {fileID: 638604479}
+    - target: {fileID: 114916373982311304, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: Defence
+      value: 
+      objectReference: {fileID: 1673881216}
+    - target: {fileID: 114916373982311304, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: MinHealth
+      value: 
+      objectReference: {fileID: 584362085}
+    - target: {fileID: 114916373982311304, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: MinMana
+      value: 
+      objectReference: {fileID: 154808880}
+    - target: {fileID: 114916373982311304, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: MinAttack
+      value: 
+      objectReference: {fileID: 1808695795}
+    - target: {fileID: 114916373982311304, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: MinDefence
+      value: 
+      objectReference: {fileID: 1122671107}
+    - target: {fileID: 114929427837989608, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: Health
+      value: 
+      objectReference: {fileID: 805764556}
+    - target: {fileID: 114929427837989608, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: Mana
+      value: 
+      objectReference: {fileID: 1903335190}
+    - target: {fileID: 114929427837989608, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: Attack
+      value: 
+      objectReference: {fileID: 1802890543}
+    - target: {fileID: 114929427837989608, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: Defence
+      value: 
+      objectReference: {fileID: 1853059805}
+    - target: {fileID: 114929427837989608, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: MinHealth
+      value: 
+      objectReference: {fileID: 358279054}
+    - target: {fileID: 114929427837989608, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: MinMana
+      value: 
+      objectReference: {fileID: 798513408}
+    - target: {fileID: 114929427837989608, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: MinAttack
+      value: 
+      objectReference: {fileID: 2025646017}
+    - target: {fileID: 114929427837989608, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: MinDefence
+      value: 
+      objectReference: {fileID: 799799633}
+    - target: {fileID: 114493897944877286, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 615452399}
+    - target: {fileID: 114493897944877286, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1825893297}
+    - target: {fileID: 114812014255312714, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 615452399}
+    - target: {fileID: 114812014255312714, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 1825893297}
+    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: NearHealth
+      value: 
+      objectReference: {fileID: 263418625}
+    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: NearMana
+      value: 
+      objectReference: {fileID: 1813046590}
+    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: NearAttack
+      value: 
+      objectReference: {fileID: 1863055109}
+    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: NearDefence
+      value: 
+      objectReference: {fileID: 1844103153}
+    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: FarHealth
+      value: 
+      objectReference: {fileID: 2132670663}
+    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: FarMana
+      value: 
+      objectReference: {fileID: 636442833}
+    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: FarAttack
+      value: 
+      objectReference: {fileID: 1948461903}
+    - target: {fileID: 114156101713575152, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: FarDefence
+      value: 
+      objectReference: {fileID: 852317351}
+    - target: {fileID: 114496296701121762, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 615452399}
+    - target: {fileID: 114496296701121762, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 703378640}
+    - target: {fileID: 114139330876811808, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 615452399}
+    - target: {fileID: 114139330876811808, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 703378640}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: AttackCheckNodeSprite
+      value: 
+      objectReference: {fileID: 2108714499}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: AttackValueCheckNodeSprite
+      value: 
+      objectReference: {fileID: 587474948}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: DefenceCheckNodeSprite
+      value: 
+      objectReference: {fileID: 1675538535}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: DefenceValueCheckNodeSprite
+      value: 
+      objectReference: {fileID: 1346411681}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: ManaCheckNodeSprite
+      value: 
+      objectReference: {fileID: 522611314}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: ManaValueCheckNodeSprite
+      value: 
+      objectReference: {fileID: 1637404710}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: AttackCheckSequenceSprite
+      value: 
+      objectReference: {fileID: 1570596330}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: DefenceCheckSequenceSprite
+      value: 
+      objectReference: {fileID: 2057541521}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: ManaCheckSequenceSprite
+      value: 
+      objectReference: {fileID: 1450841923}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: ManaCheckHealthNodeSprite
+      value: 
+      objectReference: {fileID: 672776482}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: HealthCheckNodeSprite
+      value: 
+      objectReference: {fileID: 513627120}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: AttackPlayerNodeSprite
+      value: 
+      objectReference: {fileID: 2116182033}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: BuffSelectorNodeSprite
+      value: 
+      objectReference: {fileID: 416595500}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: HealthCheckSequenceSprite
+      value: 
+      objectReference: {fileID: 1814203647}
+    - target: {fileID: 114370174171442082, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: rootNodeSprite
+      value: 
+      objectReference: {fileID: 1557562186}
+    - target: {fileID: 114991065568111386, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 435383990}
+    - target: {fileID: 114170142695511002, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 435383990}
+    - target: {fileID: 114809436683909818, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 72075530}
+    - target: {fileID: 114887983377434414, guid: 40493b15c6a3de243b176548449bb2c8,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 72075530}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40493b15c6a3de243b176548449bb2c8, type: 2}
   m_IsPrefabAsset: 0
@@ -11515,6 +12157,12 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1713815946 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114854113306835256, guid: 40493b15c6a3de243b176548449bb2c8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1231099042}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1729950818
 GameObject:
   m_ObjectHideFlags: 0
@@ -13557,6 +14205,11 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1954870930}
   m_CullTransparentMesh: 0
+--- !u!1 &1988939281 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1004678031980846, guid: 40493b15c6a3de243b176548449bb2c8,
+    type: 2}
+  m_PrefabInternal: {fileID: 1231099042}
 --- !u!1 &1990409314
 GameObject:
   m_ObjectHideFlags: 0
