@@ -190,21 +190,23 @@ public class FuzzyBehaviourScript : MonoBehaviour
         ownData = ai;
     }
 
-    private void Update()
-    {
-        RunFuzzy();
-    }
+    //private void Update()
+    //{
+    //    RunFuzzy();
+    //}
     public void Evaluate()
     {
-       
-        rootNode.Evaluate();
-        StartCoroutine(Execute());
+       if (RunFuzzy())
+        {
+            rootNode.Evaluate();
+            StartCoroutine(Execute());
+        }
     }
 
     private IEnumerator Execute()
     {
         Debug.Log("The AI is thinking...");
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(0.5f);
         // yield return new WaitForEndOfFrame();
         //low health
         if (HealthRisk)
@@ -548,7 +550,7 @@ public class FuzzyBehaviourScript : MonoBehaviour
         Sprite.color = new Color(255, 0, 0, 255);
     }
      
-    private void RunFuzzy()
+    private bool RunFuzzy()
     {      
         float result = 0.0f;
 
@@ -557,83 +559,110 @@ public class FuzzyBehaviourScript : MonoBehaviour
         Vector3 FuzzyDefence = BasicFuzzy(ownData.CurrentDefence / 15.0f);
         Vector3 FuzzyAttack = BasicFuzzy(ownData.CurrentAttack / 15.0f);
 
-        if (FuzzyHealth.z > FuzzyMana.z)
-        {
-            if (FuzzyHealth.z > FuzzyDefence.z)
-            {
-                if (FuzzyHealth.z > FuzzyAttack.z)
-                {
-                    result = FuzzyHealth.z;
-                    Debug.Log("Health Risk");
-                    HealthRisk = true;
-                    ManaRisk = false;
-                    DefenceRisk = false;
-                    AttackRisk = false;
-                    NoRisk = false;
-                }
-            }
-        }
-        else if(FuzzyMana.z > FuzzyHealth.z)
-        {
-            if (FuzzyMana.z > FuzzyDefence.z)
-            {
-                if (FuzzyMana.z > FuzzyAttack.z)
-                {
-                    result = FuzzyMana.z;
-                    Debug.Log("Mana Risk");
-                    HealthRisk = false;
-                    ManaRisk = true;
-                    DefenceRisk = false;
-                    AttackRisk = false;
-                    NoRisk = false;
-                }
-            }
-        }
-        else if(FuzzyDefence.z > FuzzyHealth.z)
-        {
-            if (FuzzyDefence.z > FuzzyMana.z)
-            {
-                if (FuzzyDefence.z > FuzzyAttack.z)
-                {
-                    result = FuzzyDefence.z;
-                    Debug.Log("Defence Risk");
-                    HealthRisk = false;
-                    ManaRisk = false;
-                    DefenceRisk = true;
-                    AttackRisk = false;
-                    NoRisk = false;
-                }
-            }
-        }
-        else if(FuzzyAttack.z > FuzzyHealth.z)
-        {
-            if (FuzzyAttack.z > FuzzyMana.z)
-            {
-                if (FuzzyAttack.z > FuzzyDefence.z)
-                {
-                    result = FuzzyAttack.z;
-                    Debug.Log("Attack Risk");
-                    HealthRisk = false;
-                    ManaRisk = false;
-                    DefenceRisk = false;
-                    AttackRisk = true;
-                    NoRisk = false;
-                }
-            }
-        }
-        else
-        {
-            HealthRisk = false;
-            ManaRisk = false;
-            DefenceRisk = false;
-            AttackRisk = false;
-            NoRisk = true;
-        }
-       HealthResult = BasicFuzzy(ownData.CurrentHealth / ownData.MaxHealth);
-       ManaResult = BasicFuzzy(ownData.CurrentMana / ownData.MaxMana);
-       DefenceResult = BasicFuzzy(ownData.CurrentDefence / 15.0f);
-       AttackResult = BasicFuzzy(ownData.CurrentAttack / 15.0f);
+        HealthResult = BasicFuzzy(ownData.CurrentHealth / ownData.MaxHealth);
+        ManaResult = BasicFuzzy(ownData.CurrentMana / ownData.MaxMana);
+        DefenceResult = BasicFuzzy(ownData.CurrentDefence / 15.0f);
+        AttackResult = BasicFuzzy(ownData.CurrentAttack / 15.0f);
 
+        if (FuzzyHealth.z > FuzzyHealth.x)
+        {
+            if (FuzzyHealth.z > FuzzyMana.z)
+            {
+                if (FuzzyHealth.z > FuzzyDefence.z)
+                {
+                    if (FuzzyHealth.z > FuzzyAttack.z)
+                    {
+                        if (FuzzyHealth.z > 0.5f)
+                        {
+                            result = FuzzyHealth.z;
+                            Debug.Log("Health Risk");
+                            HealthRisk = true;
+                            ManaRisk = false;
+                            DefenceRisk = false;
+                            AttackRisk = false;
+                            NoRisk = false;
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (FuzzyMana.z > FuzzyMana.x)
+        {
+            if (FuzzyMana.z > FuzzyHealth.z)
+            {
+                if (FuzzyMana.z > FuzzyDefence.z)
+                {
+                    if (FuzzyMana.z > FuzzyAttack.z)
+                    {
+                        if (FuzzyMana.z > 0.5f)
+                        {
+                            result = FuzzyMana.z;
+                            Debug.Log("Mana Risk");
+                            HealthRisk = false;
+                            ManaRisk = true;
+                            DefenceRisk = false;
+                            AttackRisk = false;
+                            NoRisk = false;
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (FuzzyDefence.z > FuzzyDefence.x)
+        {
+            if (FuzzyDefence.z > FuzzyHealth.z)
+            {
+                if (FuzzyDefence.z > FuzzyMana.z)
+                {
+                    if (FuzzyDefence.z > FuzzyAttack.z)
+                    {
+                        if (FuzzyDefence.z > 0.5f)
+                        {
+                            result = FuzzyDefence.z;
+                            Debug.Log("Defence Risk");
+                            HealthRisk = false;
+                            ManaRisk = false;
+                            DefenceRisk = true;
+                            AttackRisk = false;
+                            NoRisk = false;
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (FuzzyAttack.z > FuzzyAttack.x)
+        {
+            if (FuzzyAttack.z > FuzzyHealth.z)
+            {
+                if (FuzzyAttack.z > FuzzyMana.z)
+                {
+                    if (FuzzyAttack.z > FuzzyDefence.z)
+                    {
+                        result = FuzzyAttack.z;
+                        Debug.Log("Attack Risk");
+                        HealthRisk = false;
+                        ManaRisk = false;
+                        DefenceRisk = false;
+                        AttackRisk = true;
+                        NoRisk = false;
+                        return true;
+                    }
+                }
+            }
+        }
+
+        HealthRisk = false;
+        ManaRisk = false;
+        DefenceRisk = false;
+        AttackRisk = false;
+        NoRisk = true;
+        return true;
     }
 
     private Vector3 BasicFuzzy(float inputValue)
