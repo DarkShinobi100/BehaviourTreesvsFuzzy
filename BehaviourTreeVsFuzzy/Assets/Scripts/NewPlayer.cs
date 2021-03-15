@@ -93,6 +93,22 @@ public class NewPlayer : MonoBehaviour
     {
         get { return MagicAttackValue; }
     }
+    public float MinimumHealth
+    {
+        get { return lowHealthThreshold; }
+    }
+    public float MinimumMana
+    {
+        get { return lowManaThreshold; }
+    }
+    public float MinimumAttack
+    {
+        get { return lowAttackThreshold; }
+    }
+    public float MinimumDefence
+    {
+        get { return lowDefenceThreshold; }
+    }
 
     //Triggers for decisions
     public bool HasLowDefence
