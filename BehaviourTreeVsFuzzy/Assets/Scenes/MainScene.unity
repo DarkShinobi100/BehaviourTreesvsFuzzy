@@ -2121,10 +2121,82 @@ MonoBehaviour:
   BuffSelectorNodeSprite: {fileID: 416595500}
   HealthCheckSequenceSprite: {fileID: 1814203647}
   rootNodeSprite: {fileID: 1557562186}
-  HealthResult: 0
-  ManaResult: 0
-  DefenceResult: 0
-  AttackResult: 0
+  HealthResult: {x: 0, y: 0, z: 0}
+  ManaResult: {x: 0, y: 0, z: 0}
+  DefenceResult: {x: 0, y: 0, z: 0}
+  AttackResult: {x: 0, y: 0, z: 0}
+  critical:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.005188
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5512085
+      value: -0.010391235
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  hurt:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  healthy:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0039367676
+      value: 1.0130005
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1.0026245
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &334191450
 GameObject:
   m_ObjectHideFlags: 0
@@ -2430,10 +2502,82 @@ MonoBehaviour:
   BuffSelectorNodeSprite: {fileID: 2025146056}
   HealthCheckSequenceSprite: {fileID: 762268692}
   rootNodeSprite: {fileID: 801570019}
-  HealthResult: 0
-  ManaResult: 0
-  DefenceResult: 0
-  AttackResult: 0
+  HealthResult: {x: 0, y: 0, z: 0}
+  ManaResult: {x: 0, y: 0, z: 0}
+  DefenceResult: {x: 0, y: 0, z: 0}
+  AttackResult: {x: 0, y: 0, z: 0}
+  critical:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1.0100403
+      inSlope: -1.5177058
+      outSlope: -1.5177058
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.99365234
+      value: -0.49803162
+      inSlope: -1.5177058
+      outSlope: -1.5177058
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 0
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  hurt:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.51265717
+      value: 1.0089111
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1.0076294
+      value: -0.008903503
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 0
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  healthy:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 0
+    m_RotationOrder: 4
 --- !u!1 &410912891
 GameObject:
   m_ObjectHideFlags: 0
@@ -2684,7 +2828,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 326.53, y: -214.80002}
+  m_AnchoredPosition: {x: 326.5293, y: -214.80002}
   m_SizeDelta: {x: 127.5, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &435383992

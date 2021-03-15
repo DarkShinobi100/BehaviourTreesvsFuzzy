@@ -102,7 +102,13 @@ public class FuzzyBehaviourScript : MonoBehaviour
     public delegate void NodePassed(string trigger);
 
     [SerializeField]
-    private double HealthResult;
+    private Vector3 HealthResult;
+    [SerializeField]
+    private Vector3 ManaResult;
+    [SerializeField]
+    private Vector3 DefenceResult;
+    [SerializeField]
+    private Vector3 AttackResult;
 
     public AnimationCurve critical;
     public AnimationCurve hurt;
@@ -117,7 +123,6 @@ public class FuzzyBehaviourScript : MonoBehaviour
 
     void Start()
     {
-        SetupFuzzy();
         //Check low health, if its low it will decide to heal
         ManaCheckHealthNode = new ActionNode(CanUseMana);
         HealthCheckNode = new ActionNode(CriticalHealthCheck);
@@ -189,9 +194,9 @@ public class FuzzyBehaviourScript : MonoBehaviour
     {
         RunFuzzy();
     }
-
     public void Evaluate()
     {
+       
         rootNode.Evaluate();
         StartCoroutine(Execute());
     }
@@ -202,7 +207,7 @@ public class FuzzyBehaviourScript : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
         // yield return new WaitForEndOfFrame();
         //low health
-        if (HealthCheckSequence.nodeState == NodeStates.SUCCESS && HealthRisk)
+        if (HealthRisk)
         {
             Debug.Log("The AI decided to heal itself");
             UpdateSprites();
@@ -216,10 +221,10 @@ public class FuzzyBehaviourScript : MonoBehaviour
             //sound effect
             audioPlayer.PlayOneShot(SFX[0]);
         }//apply a buff
-        else if (BuffSelectorNode.nodeState == NodeStates.SUCCESS)
+        else if (ManaRisk || DefenceRisk || AttackRisk)
         {
             //determine which buff to use
-            if (ManaCheckSequence.nodeState == NodeStates.SUCCESS && ManaRisk)
+            if (ManaRisk)
             {
                 Debug.Log("The AI decided to Increase mana!");
                 UpdateSprites();
@@ -232,7 +237,7 @@ public class FuzzyBehaviourScript : MonoBehaviour
                 //sound effect
                 audioPlayer.PlayOneShot(SFX[1]);
             }
-            else if (DefenceCheckSequence.nodeState == NodeStates.SUCCESS && DefenceRisk)
+            else if (DefenceRisk)
             {
                 Debug.Log("The AI decided to Increase Defence!");
                 UpdateSprites();
@@ -245,7 +250,7 @@ public class FuzzyBehaviourScript : MonoBehaviour
                 //sound effect
                 audioPlayer.PlayOneShot(SFX[2]);
             }
-            else if (AttackCheckSequence.nodeState == NodeStates.SUCCESS && AttackRisk)
+            else if (AttackRisk)
             {
                 Debug.Log("Increase Attack!");
 
@@ -260,7 +265,7 @@ public class FuzzyBehaviourScript : MonoBehaviour
                 audioPlayer.PlayOneShot(SFX[3]);
             }
         }//attack the player
-        else if (AttackPlayerNode.nodeState == NodeStates.SUCCESS && NoRisk)
+        else if (NoRisk )
         {
             Debug.Log("The AI decided to attack the player");
             UpdateSprites();
@@ -273,7 +278,7 @@ public class FuzzyBehaviourScript : MonoBehaviour
             //sound effect
             audioPlayer.PlayOneShot(SFX[4]);
         }
-        else
+        else if(!HealthRisk && !ManaRisk && !AttackRisk && !DefenceRisk)
         {
             Debug.Log("Default Attack");
             UpdateSprites();
@@ -549,8 +554,8 @@ public class FuzzyBehaviourScript : MonoBehaviour
 
         Vector3 FuzzyHealth = BasicFuzzy(ownData.CurrentHealth / ownData.MaxHealth);
         Vector3 FuzzyMana = BasicFuzzy(ownData.CurrentMana / ownData.MaxMana);
-        Vector3 FuzzyAttack = BasicFuzzy(ownData.CurrentDefence);
-        Vector3 FuzzyDefence = BasicFuzzy(ownData.CurrentAttack);
+        Vector3 FuzzyDefence = BasicFuzzy(ownData.CurrentDefence / 15.0f);
+        Vector3 FuzzyAttack = BasicFuzzy(ownData.CurrentAttack / 15.0f);
 
         if (FuzzyHealth.z > FuzzyMana.z)
         {
@@ -558,7 +563,7 @@ public class FuzzyBehaviourScript : MonoBehaviour
             {
                 if (FuzzyHealth.z > FuzzyAttack.z)
                 {
-                    result = 1.0f;
+                    result = FuzzyHealth.z;
                     Debug.Log("Health Risk");
                     HealthRisk = true;
                     ManaRisk = false;
@@ -574,6 +579,7 @@ public class FuzzyBehaviourScript : MonoBehaviour
             {
                 if (FuzzyMana.z > FuzzyAttack.z)
                 {
+                    result = FuzzyMana.z;
                     Debug.Log("Mana Risk");
                     HealthRisk = false;
                     ManaRisk = true;
@@ -589,6 +595,7 @@ public class FuzzyBehaviourScript : MonoBehaviour
             {
                 if (FuzzyDefence.z > FuzzyAttack.z)
                 {
+                    result = FuzzyDefence.z;
                     Debug.Log("Defence Risk");
                     HealthRisk = false;
                     ManaRisk = false;
@@ -604,6 +611,7 @@ public class FuzzyBehaviourScript : MonoBehaviour
             {
                 if (FuzzyAttack.z > FuzzyDefence.z)
                 {
+                    result = FuzzyAttack.z;
                     Debug.Log("Attack Risk");
                     HealthRisk = false;
                     ManaRisk = false;
@@ -621,8 +629,10 @@ public class FuzzyBehaviourScript : MonoBehaviour
             AttackRisk = false;
             NoRisk = true;
         }
-        HealthResult = result;
-
+       HealthResult = BasicFuzzy(ownData.CurrentHealth / ownData.MaxHealth);
+       ManaResult = BasicFuzzy(ownData.CurrentMana / ownData.MaxMana);
+       DefenceResult = BasicFuzzy(ownData.CurrentDefence / 15.0f);
+       AttackResult = BasicFuzzy(ownData.CurrentAttack / 15.0f);
 
     }
 

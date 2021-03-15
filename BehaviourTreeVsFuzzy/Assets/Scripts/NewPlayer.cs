@@ -120,7 +120,7 @@ public class NewPlayer : MonoBehaviour
         //set player stats
         currentHealth = maxHealth;
         currentMana = maxMana;
-        AttackValue = 10;
+       // AttackValue = 10;
         MagicAttackValue = 3;
         DefenceValue = 5;
 
@@ -189,12 +189,21 @@ public class NewPlayer : MonoBehaviour
     public float increaseAttack()
     {
         AttackValue += Random.Range(1, 5);
+
+        if(AttackValue>15)
+        {
+            AttackValue = 15;
+        }
         return AttackValue;
     }
 
     public float increaseDefence()
     {
         DefenceValue += Random.Range(1, 5);
+        if (DefenceValue > 15)
+        {
+            DefenceValue = 15;
+        }
         return DefenceValue;
     }
 
