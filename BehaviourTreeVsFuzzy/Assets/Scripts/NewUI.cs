@@ -53,6 +53,56 @@ public class NewUI : MonoBehaviour
     [SerializeField]
     private Slider FarDefence;
 
+    [SerializeField]
+    private Slider FarFuzzyHealthX;
+    [SerializeField]
+    private Slider FarFuzzyHealthY;
+    [SerializeField]
+    private Slider FarFuzzyHealthZ;
+    [SerializeField]
+    private Slider FarFuzzyManaX;
+    [SerializeField]
+    private Slider FarFuzzyManaY;
+    [SerializeField]
+    private Slider FarFuzzyManaZ;
+    [SerializeField]
+    private Slider FarFuzzyAttackX;
+    [SerializeField]
+    private Slider FarFuzzyAttackY;
+    [SerializeField]
+    private Slider FarFuzzyAttackZ;
+    [SerializeField]
+    private Slider FarFuzzyDefenceX;
+    [SerializeField]
+    private Slider FarFuzzyDefenceY;
+    [SerializeField]
+    private Slider FarFuzzyDefenceZ;
+
+    [SerializeField]
+    private Slider NearFuzzyHealthX;
+    [SerializeField]
+    private Slider NearFuzzyHealthY;
+    [SerializeField]
+    private Slider NearFuzzyHealthZ;
+    [SerializeField]
+    private Slider NearFuzzyManaX;
+    [SerializeField]
+    private Slider NearFuzzyManaY;
+    [SerializeField]
+    private Slider NearFuzzyManaZ;
+    [SerializeField]
+    private Slider NearFuzzyAttackX;
+    [SerializeField]
+    private Slider NearFuzzyAttackY;
+    [SerializeField]
+    private Slider NearFuzzyAttackZ;
+    [SerializeField]
+    private Slider NearFuzzyDefenceX;
+    [SerializeField]
+    private Slider NearFuzzyDefenceY;
+    [SerializeField]
+    private Slider NearFuzzyDefenceZ;
+
 
     private void FixedUpdate()
     {
@@ -127,5 +177,41 @@ public class NewUI : MonoBehaviour
         FarMana.value = FarAiPlayer.CurrentMana;
         FarAttack.value = FarAiPlayer.CurrentAttack;
         FarDefence.value = FarAiPlayer.CurrentDefence;
+
+        if (Fuzzy)
+        {
+            FarFuzzyHealthX.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentHealth / FarAiPlayer.MaxHealth).x;
+            FarFuzzyHealthY.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentHealth / FarAiPlayer.MaxHealth).y;
+            FarFuzzyHealthZ.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentHealth / FarAiPlayer.MaxHealth).z;
+
+            FarFuzzyManaX.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentMana / FarAiPlayer.MaxMana).x;
+            FarFuzzyManaY.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentMana / FarAiPlayer.MaxMana).y;
+            FarFuzzyManaZ.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentMana / FarAiPlayer.MaxMana).z;
+
+            FarFuzzyDefenceX.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentDefence / 15.0f).x;
+            FarFuzzyDefenceY.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentDefence / 15.0f).y;
+            FarFuzzyDefenceZ.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentDefence / 15.0f).z;
+
+            FarFuzzyAttackX.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentAttack / 15.0f).x;
+            FarFuzzyAttackY.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentAttack / 15.0f).y;
+            FarFuzzyAttackZ.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentAttack / 15.0f).z;
+
+            NearFuzzyHealthX.value = FuzzyenemyBehaviorTreeNear.BasicFuzzy(NearAIPlayer.CurrentHealth / NearAIPlayer.MaxHealth).x;
+            NearFuzzyHealthY.value = FuzzyenemyBehaviorTreeNear.BasicFuzzy(NearAIPlayer.CurrentHealth / NearAIPlayer.MaxHealth).y;
+            NearFuzzyHealthZ.value = FuzzyenemyBehaviorTreeNear.BasicFuzzy(NearAIPlayer.CurrentHealth / NearAIPlayer.MaxHealth).z;
+
+            NearFuzzyManaX.value = FuzzyenemyBehaviorTreeNear.BasicFuzzy(NearAIPlayer.CurrentMana / NearAIPlayer.MaxMana).x;
+            NearFuzzyManaY.value = FuzzyenemyBehaviorTreeNear.BasicFuzzy(NearAIPlayer.CurrentMana / NearAIPlayer.MaxMana).y;
+            NearFuzzyManaZ.value = FuzzyenemyBehaviorTreeNear.BasicFuzzy(NearAIPlayer.CurrentMana / NearAIPlayer.MaxMana).z;
+
+            NearFuzzyDefenceX.value = FuzzyenemyBehaviorTreeNear.BasicFuzzy(NearAIPlayer.CurrentDefence / 15.0f).x;
+            NearFuzzyDefenceY.value = FuzzyenemyBehaviorTreeNear.BasicFuzzy(NearAIPlayer.CurrentDefence / 15.0f).y;
+            NearFuzzyDefenceZ.value = FuzzyenemyBehaviorTreeNear.BasicFuzzy(NearAIPlayer.CurrentDefence / 15.0f).z;
+
+            NearFuzzyAttackX.value = FuzzyenemyBehaviorTreeNear.BasicFuzzy(NearAIPlayer.CurrentAttack / 15.0f).x;
+            NearFuzzyAttackY.value = FuzzyenemyBehaviorTreeNear.BasicFuzzy(NearAIPlayer.CurrentAttack / 15.0f).y;
+            NearFuzzyAttackZ.value = FuzzyenemyBehaviorTreeNear.BasicFuzzy(NearAIPlayer.CurrentAttack / 15.0f).z;
+        }
+
     }
 }

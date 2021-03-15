@@ -198,10 +198,7 @@ public class FuzzyBehaviourScript : MonoBehaviour
         ownData = ai;
     }
 
-    //private void Update()
-    //{
-    //    RunFuzzy();
-    //}
+
     public void Evaluate()
     {
        if (RunFuzzy())
@@ -683,7 +680,7 @@ public class FuzzyBehaviourScript : MonoBehaviour
         return true;
     }
 
-    private Vector3 BasicFuzzy(float inputValue)
+    public Vector3 BasicFuzzy(float inputValue)
     {
         float healthyValue = healthy.Evaluate(inputValue);
         float hurtValue = hurt.Evaluate(inputValue);
