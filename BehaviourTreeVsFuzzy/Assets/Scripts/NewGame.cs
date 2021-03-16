@@ -5,8 +5,6 @@ public class NewGame : MonoBehaviour
     [SerializeField]
     private Animator stateMachineAI;
     [SerializeField]
-    private Animator stateMachineHuman;
-    [SerializeField]
     bool FightHumanPlayer = false;
     [SerializeField]
     private PlayerController playerController;
@@ -77,7 +75,7 @@ public class NewGame : MonoBehaviour
             }
             else
             {
-                stateMachineHuman.SetTrigger("EndGame");
+                stateMachineAI.SetTrigger("EndGame");
             }
             uiController.EndGame();
             return;
@@ -93,7 +91,7 @@ public class NewGame : MonoBehaviour
         {
             FuzzyenemyBehaviorTreeNear.UpdateSprites();
 
-            stateMachineHuman.SetTrigger("EndTurn");
+            stateMachineAI.SetTrigger("EndTurn");
         }
 
         turn ^= 1;
