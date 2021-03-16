@@ -110,6 +110,11 @@ public class NewUI : MonoBehaviour
     [SerializeField]
     private GameObject PlayerButtons;
 
+    [SerializeField]
+    private GameObject QuitButton;
+    [SerializeField]
+    private GameObject ResetButton;
+
     private void FixedUpdate()
     {
         if(!VsHuman)
@@ -125,8 +130,10 @@ public class NewUI : MonoBehaviour
     public void EndGame()
     {
         turnText.text = gameOverMessage;
+        QuitButton.SetActive(true);
+        ResetButton.SetActive(true);
 
-        if(!VsHuman)
+        if (!VsHuman)
         {
             if (NearAIPlayer.CurrentHealth <= 0)
             {
@@ -153,9 +160,8 @@ public class NewUI : MonoBehaviour
             playerHealthText.text = WinMessage;
             enemyHealthText.text = LoseMessage;
             AiFarStateText.text = "";
-        }
-
-
+        }    
+        
     }
 
     /* We change the turn message dpending on whose turn it is currently */

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NewGame : MonoBehaviour
 {
@@ -111,5 +112,16 @@ public class NewGame : MonoBehaviour
     public void SetNearFuzzy()
     {
         NearFuzzyPlayer = true;
+    }
+
+    public void Reset()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);     
+            
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 }
