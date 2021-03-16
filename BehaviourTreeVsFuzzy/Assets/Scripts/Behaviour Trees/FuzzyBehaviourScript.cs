@@ -103,22 +103,6 @@ public class FuzzyBehaviourScript : MonoBehaviour
 
     public delegate void NodePassed(string trigger);
 
-    [SerializeField]
-    private Vector3 HealthResult;
-    [SerializeField]
-    private Vector3 ManaResult;
-    [SerializeField]
-    private Vector3 DefenceResult;
-    [SerializeField]
-    private Vector3 AttackResult;
-    [SerializeField]
-    private Vector3 HealthResult1;
-    [SerializeField]
-    private Vector3 ManaResult1;
-    [SerializeField]
-    private Vector3 DefenceResult1;
-    [SerializeField]
-    private Vector3 AttackResult1;
 
     public AnimationCurve critical;
     public AnimationCurve hurt;
@@ -572,8 +556,6 @@ public class FuzzyBehaviourScript : MonoBehaviour
      
     private bool RunFuzzy()
     {      
-        float result = 0.0f;
-
         Vector3 FuzzyHealth = BasicFuzzy(ownData.CurrentHealth / ownData.MaxHealth);
         Vector3 FuzzyMana = BasicFuzzy(ownData.CurrentMana / ownData.MaxMana);
         Vector3 FuzzyDefence = BasicFuzzy(ownData.CurrentDefence / 15.0f);
@@ -583,16 +565,6 @@ public class FuzzyBehaviourScript : MonoBehaviour
         Vector3 FuzzyMinMana = BasicFuzzy(ownData.MinimumMana / ownData.MaxMana);
         Vector3 FuzzyMinDefence = BasicFuzzy(ownData.MinimumDefence / 15.0f);
         Vector3 FuzzyMinAttack = BasicFuzzy(ownData.MinimumAttack / 15.0f);
-        HealthResult1 = FuzzyMinHealth;
-        ManaResult1 = FuzzyMinMana;
-        DefenceResult1 = FuzzyMinDefence;
-        AttackResult1 = FuzzyMinAttack;
-
-
-        HealthResult = BasicFuzzy(ownData.CurrentHealth / ownData.MaxHealth);
-        ManaResult = BasicFuzzy(ownData.CurrentMana / ownData.MaxMana);
-        DefenceResult = BasicFuzzy(ownData.CurrentDefence / 15.0f);
-        AttackResult = BasicFuzzy(ownData.CurrentAttack / 15.0f);
 
         if (FuzzyHealth.z > FuzzyHealth.x)
         {
@@ -604,7 +576,6 @@ public class FuzzyBehaviourScript : MonoBehaviour
                     {
                         if (FuzzyHealth.z >= FuzzyMinHealth.z)
                         {
-                            result = FuzzyHealth.z;
                             Debug.Log("Health Risk");
                             HealthRisk = true;
                             ManaRisk = false;
@@ -628,7 +599,6 @@ public class FuzzyBehaviourScript : MonoBehaviour
                     {
                         if (FuzzyMana.z >= FuzzyMinMana.z)
                         {
-                            result = FuzzyMana.z;
                             Debug.Log("Mana Risk");
                             HealthRisk = false;
                             ManaRisk = true;
@@ -652,7 +622,6 @@ public class FuzzyBehaviourScript : MonoBehaviour
                     {
                         if (FuzzyDefence.z >= FuzzyMinDefence.z)
                         {
-                            result = FuzzyDefence.z;
                             Debug.Log("Defence Risk");
                             HealthRisk = false;
                             ManaRisk = false;
@@ -674,7 +643,6 @@ public class FuzzyBehaviourScript : MonoBehaviour
                 {
                     if (FuzzyAttack.z >= FuzzyMinAttack.z)
                     {
-                        result = FuzzyAttack.z;
                         Debug.Log("Attack Risk");
                         HealthRisk = false;
                         ManaRisk = false;

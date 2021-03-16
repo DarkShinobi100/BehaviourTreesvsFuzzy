@@ -107,6 +107,9 @@ public class NewUI : MonoBehaviour
     [SerializeField]
     private NewPlayer Humanplayer;
 
+    [SerializeField]
+    private GameObject PlayerButtons;
+
     private void FixedUpdate()
     {
         if(!VsHuman)
@@ -122,7 +125,24 @@ public class NewUI : MonoBehaviour
     public void EndGame()
     {
         turnText.text = gameOverMessage;
-        if (NearAIPlayer.CurrentHealth <= 0)
+
+        if(!VsHuman)
+        {
+            if (NearAIPlayer.CurrentHealth <= 0)
+            {
+                playerHealthText.text = LoseMessage;
+                enemyHealthText.text = WinMessage;
+                AINearStateText.text = "";
+            }
+            else
+            {
+                playerHealthText.text = WinMessage;
+                enemyHealthText.text = LoseMessage;
+                AiFarStateText.text = "";
+            }
+        }
+        else
+        if (Humanplayer.CurrentHealth <= 0)
         {
             playerHealthText.text = LoseMessage;
             enemyHealthText.text = WinMessage;
@@ -133,8 +153,9 @@ public class NewUI : MonoBehaviour
             playerHealthText.text = WinMessage;
             enemyHealthText.text = LoseMessage;
             AiFarStateText.text = "";
-        }      
-        
+        }
+
+
     }
 
     /* We change the turn message dpending on whose turn it is currently */
@@ -153,8 +174,16 @@ public class NewUI : MonoBehaviour
             turnText.text = playerTurnMessage;
             enemyHealthText.text = WaitMessage;
 
-            FuzzyenemyBehaviorTreeFar.ResetSprites();
-            FuzzyenemyBehaviorTreeNear.UpdateSprites();           
+
+            if(!VsHuman)
+            {
+                FuzzyenemyBehaviorTreeFar.ResetSprites();
+                FuzzyenemyBehaviorTreeNear.UpdateSprites();
+            }    
+            else
+            {
+                PlayerButtons.SetActive(true);
+            }
         }
         else
         {
@@ -169,8 +198,20 @@ public class NewUI : MonoBehaviour
             }
             playerHealthText.text = WaitMessage;
 
-            FuzzyenemyBehaviorTreeNear.ResetSprites();            
+            if(!VsHuman)
+            {
+                FuzzyenemyBehaviorTreeNear.ResetSprites();
+            }
+            else
+            {
+                PlayerButtons.SetActive(false);
+            }
             FuzzyenemyBehaviorTreeFar.UpdateSprites();
+        }
+        if(VsHuman)
+        {
+            playerHealthText.text = WaitMessage;
+            enemyHealthText.text = WaitMessage;
         }
     }
 

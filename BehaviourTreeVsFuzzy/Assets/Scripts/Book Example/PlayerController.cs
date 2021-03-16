@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour {
     private NewPlayer ownData;
     [SerializeField]
     private NewPlayer enemyData;
+    [SerializeField]
+    private Text EnemyStateText;
 
     [Header("Buttons")]
     [SerializeField]
@@ -18,14 +20,10 @@ public class PlayerController : MonoBehaviour {
     private Button healButton;
     [SerializeField]
     private Button attackButton;
-    [SerializeField]
-    private GameObject PlayerButtons;
 
     [SerializeField]
     private AudioClip[] SFX = new AudioClip[6];
     private AudioSource audioPlayer;
-    [SerializeField]
-    private Text StateText;
     private Animator animator;
 
     public delegate void ActionExecuted();
@@ -43,8 +41,6 @@ public class PlayerController : MonoBehaviour {
 
     private void Awake()
     {
-        PlayerButtons.SetActive(true);
-
         BuffAttackButton.onClick.AddListener(BuffAttack);
         BuffDefenceButton.onClick.AddListener(BuffDefence);
         BuffManaButton.onClick.AddListener(BuffMana);
@@ -54,12 +50,12 @@ public class PlayerController : MonoBehaviour {
 
     private void Attack()
     {
+        EnemyStateText.text = "";
         enemyData.Damage(ownData.CurrentAttack);
         ownData.DecreaseAttack();
         ownData.DecreaseMana(1);
         //animation for attacking
         animator.SetTrigger("Attack");
-        StateText.text = "Direct Attack!";
         //sound effect
         audioPlayer.PlayOneShot(SFX[4]);
         EndTurn();
@@ -67,12 +63,12 @@ public class PlayerController : MonoBehaviour {
 
     private void Heal()
     {
+        EnemyStateText.text = "";
         ownData.DecreaseMana(5);
         ownData.Heal();
 
         //animation for healing
         animator.SetTrigger("Heal");
-        StateText.text = "Heal!";
 
         //sound effect
         audioPlayer.PlayOneShot(SFX[0]);
@@ -81,12 +77,12 @@ public class PlayerController : MonoBehaviour {
 
     private void BuffDefence()
     {
+        EnemyStateText.text = "";
         ownData.DecreaseMana(2);
         ownData.increaseDefence();
 
         //animation for increasing Defence
         animator.SetTrigger("BuffDefence");
-        StateText.text = "Increase Defence!";
         //sound effect
         audioPlayer.PlayOneShot(SFX[2]);
         EndTurn();
@@ -94,12 +90,12 @@ public class PlayerController : MonoBehaviour {
 
     private void BuffAttack()
     {
+        EnemyStateText.text = "";
         ownData.DecreaseMana(2);
         ownData.increaseAttack();
 
         //animation for increasing Attack
         animator.SetTrigger("BuffAttack");
-        StateText.text = "Increase Attack!";
         //sound effect
         audioPlayer.PlayOneShot(SFX[3]);
         EndTurn();
@@ -107,12 +103,12 @@ public class PlayerController : MonoBehaviour {
 
     private void BuffMana()
     {
+        EnemyStateText.text = "";
         ownData.increaseMana();
 
         //animation for increasing mana
         animator.SetTrigger("BuffMana");
 
-        StateText.text = "Increase mana!";
         //sound effect
         audioPlayer.PlayOneShot(SFX[1]);
         EndTurn();
@@ -123,7 +119,6 @@ public class PlayerController : MonoBehaviour {
         if(onActionExecuted != null)
         {
             onActionExecuted();
-            PlayerButtons.SetActive(false);
         }
     }
 }

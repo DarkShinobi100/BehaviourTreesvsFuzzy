@@ -24,7 +24,7 @@ public class NewGame : MonoBehaviour
     private NewUI uiController;
     private int turn = 0;
 
-    private void Awake()
+    private void Start()
     {
         if (!FightHumanPlayer)
         {
@@ -89,7 +89,7 @@ public class NewGame : MonoBehaviour
         }
         else
         {
-            FuzzyenemyBehaviorTreeNear.UpdateSprites();
+            FuzzyenemyBehaviorTreeFar.UpdateSprites();
 
             stateMachineAI.SetTrigger("EndTurn");
         }

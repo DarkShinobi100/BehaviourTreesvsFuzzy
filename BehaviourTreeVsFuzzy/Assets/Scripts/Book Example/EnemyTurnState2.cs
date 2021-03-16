@@ -6,19 +6,29 @@ public class EnemyTurnState2 : StateMachineBehaviour
     private string EnemyNumber;
     [SerializeField]
     private int AINumber;
+    [SerializeField]
+    private bool Human;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log("********************* \n Strating the" + EnemyNumber + " enemy's turn!");
-        if(AINumber==1)
+        if(Human)
         {
-            animator.gameObject.GetComponent<NewGame>().EvaluateAITree();
+            animator.SetTrigger("EndTurn");
         }
         else
         {
-            animator.gameObject.GetComponent<NewGame>().EvaluateAITree2();
+            Debug.Log("********************* \n Strating the" + EnemyNumber + " enemy's turn!");
+            if (AINumber == 1)
+            {
+                animator.gameObject.GetComponent<NewGame>().EvaluateAITree();
+            }
+            else
+            {
+                animator.gameObject.GetComponent<NewGame>().EvaluateAITree2();
+            }
         }
+        
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
