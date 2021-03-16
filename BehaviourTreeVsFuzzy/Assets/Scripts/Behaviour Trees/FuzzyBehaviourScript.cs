@@ -11,8 +11,10 @@ public class FuzzyBehaviourScript : MonoBehaviour
 {
     private NewPlayer playerData;
     private NewPlayer ownData;
-
     private Animator animator;
+
+    [SerializeField]
+    bool HighSpeed = false;
     [SerializeField]
     private AudioClip[] SFX = new AudioClip[6];
     private AudioSource audioPlayer;
@@ -198,8 +200,14 @@ public class FuzzyBehaviourScript : MonoBehaviour
         ownData = ai;
     }
 
-
     public void Evaluate()
+    {
+        rootNode.Evaluate();
+        StartCoroutine(Execute());
+        
+    }
+
+    public void FuzzyEvaluate()
     {
        if (RunFuzzy())
         {
@@ -211,8 +219,15 @@ public class FuzzyBehaviourScript : MonoBehaviour
     private IEnumerator Execute()
     {
         Debug.Log("The AI is thinking...");
-        yield return new WaitForSeconds(0.5f);
-        // yield return new WaitForEndOfFrame();
+        if (HighSpeed)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        else
+        {
+            yield return new WaitForSeconds(2.5f);
+        }
+
         //low health
         if (HealthCheckSequence.nodeState == NodeStates.SUCCESS || HealthRisk)
         {
@@ -687,6 +702,5 @@ public class FuzzyBehaviourScript : MonoBehaviour
         float criticalValue = critical.Evaluate(inputValue);
 
         return new Vector3(healthyValue, hurtValue, criticalValue);
-    }
-
+    }    
 }

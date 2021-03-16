@@ -5,11 +5,9 @@ public class NewGame : MonoBehaviour
     [SerializeField]
     private Animator stateMachine;
     [SerializeField]
-    private UpdatedEnemyBehaviorTree enemyBehaviorTreeFar;
+    bool FarFuzzyPlayer = false;
     [SerializeField]
-    private UpdatedEnemyBehaviorTree enemyBehaviorTreeNear;
-    [SerializeField]
-    bool Fuzzy = false;
+    bool NearFuzzyPlayer = false;
     [SerializeField]
     private FuzzyBehaviourScript FuzzyenemyBehaviorTreeFar;
     [SerializeField]
@@ -24,44 +22,33 @@ public class NewGame : MonoBehaviour
 
     private void Awake()
     {
-        if (!Fuzzy)
-        {
-            enemyBehaviorTreeFar.SetPlayerData(humanPlayer, aiPlayer);
-            enemyBehaviorTreeFar.onTreeExecuted += EndTurn;
-            enemyBehaviorTreeNear.SetPlayerData(aiPlayer, humanPlayer);
-            enemyBehaviorTreeNear.onTreeExecuted += EndTurn;
-        }
-        else
-        {
-            FuzzyenemyBehaviorTreeFar.SetPlayerData(humanPlayer, aiPlayer);
-            FuzzyenemyBehaviorTreeFar.onTreeExecuted += EndTurn;
-            FuzzyenemyBehaviorTreeNear.SetPlayerData(aiPlayer, humanPlayer);
-            FuzzyenemyBehaviorTreeNear.onTreeExecuted += EndTurn;
-        }
-
+        FuzzyenemyBehaviorTreeFar.SetPlayerData(humanPlayer, aiPlayer);
+        FuzzyenemyBehaviorTreeFar.onTreeExecuted += EndTurn;
+        FuzzyenemyBehaviorTreeNear.SetPlayerData(aiPlayer, humanPlayer);
+        FuzzyenemyBehaviorTreeNear.onTreeExecuted += EndTurn;
     }
 
     public void EvaluateAITree()
     {
-        if (!Fuzzy)
+        if (!FarFuzzyPlayer)
         {
-            enemyBehaviorTreeFar.Evaluate();
+            FuzzyenemyBehaviorTreeFar.Evaluate();
         }
         else
         {
-            FuzzyenemyBehaviorTreeFar.Evaluate();
+            FuzzyenemyBehaviorTreeFar.FuzzyEvaluate();
         }
     }
 
     public void EvaluateAITree2()
     {
-        if (!Fuzzy)
+        if (!NearFuzzyPlayer)
         {
-            enemyBehaviorTreeNear.Evaluate();
+            FuzzyenemyBehaviorTreeNear.Evaluate();
         }
         else
         {
-            FuzzyenemyBehaviorTreeNear.Evaluate();
+            FuzzyenemyBehaviorTreeNear.FuzzyEvaluate();
         }
     }
 
@@ -73,18 +60,21 @@ public class NewGame : MonoBehaviour
             uiController.EndGame();
             return;
         }
-        if(!Fuzzy)
-        {
-            enemyBehaviorTreeFar.UpdateSprites();
-            enemyBehaviorTreeNear.UpdateSprites();
-        }
-        else
-        {
-            FuzzyenemyBehaviorTreeFar.UpdateSprites();
-            FuzzyenemyBehaviorTreeNear.UpdateSprites();
-        }
+
+        FuzzyenemyBehaviorTreeNear.UpdateSprites();
+        FuzzyenemyBehaviorTreeFar.UpdateSprites();
+
         stateMachine.SetTrigger("EndTurn");
         turn ^= 1;
         uiController.SetTurn(turn);
+    }
+    public void SetFarFuzzy()
+    {
+        FarFuzzyPlayer = true;
+    }
+
+    public void SetNearFuzzy()
+    {
+        NearFuzzyPlayer = true;
     }
 }
