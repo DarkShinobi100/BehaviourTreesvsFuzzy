@@ -5,7 +5,7 @@ public class EnemyTurnState : StateMachineBehaviour {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         Debug.Log("********************* \n Strating the enemy's turn!");        
-        animator.gameObject.GetComponent<Game>().EvaluateAITree();
+        animator.gameObject.GetComponent<NewGame>().EvaluateAITree();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

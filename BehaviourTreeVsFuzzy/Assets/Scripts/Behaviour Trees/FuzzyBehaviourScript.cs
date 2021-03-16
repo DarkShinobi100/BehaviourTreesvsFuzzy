@@ -287,7 +287,7 @@ public class FuzzyBehaviourScript : MonoBehaviour
                 audioPlayer.PlayOneShot(SFX[3]);
             }
         }//attack the player
-        else if (AttackPlayerNode.nodeState == NodeStates.SUCCESS || NoRisk)
+        else if (AttackPlayerNode.nodeState == NodeStates.SUCCESS)
         {
             Debug.Log("The AI decided to attack the player");
             UpdateSprites();
@@ -300,7 +300,7 @@ public class FuzzyBehaviourScript : MonoBehaviour
             //sound effect
             audioPlayer.PlayOneShot(SFX[4]);
         }
-        else if(!HealthRisk && !ManaRisk && !AttackRisk && !DefenceRisk)
+        else if(NoRisk && !HealthRisk && !ManaRisk && !AttackRisk && !DefenceRisk)
         {
             Debug.Log("Default Attack");
             UpdateSprites();

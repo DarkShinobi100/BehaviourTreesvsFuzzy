@@ -3,7 +3,13 @@
 public class NewGame : MonoBehaviour
 {
     [SerializeField]
-    private Animator stateMachine;
+    private Animator stateMachineAI;
+    [SerializeField]
+    private Animator stateMachineHuman;
+    [SerializeField]
+    bool FightHumanPlayer = false;
+    [SerializeField]
+    private PlayerController playerController;
     [SerializeField]
     bool FarFuzzyPlayer = false;
     [SerializeField]
@@ -22,10 +28,19 @@ public class NewGame : MonoBehaviour
 
     private void Awake()
     {
-        FuzzyenemyBehaviorTreeFar.SetPlayerData(humanPlayer, aiPlayer);
-        FuzzyenemyBehaviorTreeFar.onTreeExecuted += EndTurn;
-        FuzzyenemyBehaviorTreeNear.SetPlayerData(aiPlayer, humanPlayer);
-        FuzzyenemyBehaviorTreeNear.onTreeExecuted += EndTurn;
+        if (!FightHumanPlayer)
+        {
+            FuzzyenemyBehaviorTreeFar.SetPlayerData(humanPlayer, aiPlayer);
+            FuzzyenemyBehaviorTreeFar.onTreeExecuted += EndTurn;
+            FuzzyenemyBehaviorTreeNear.SetPlayerData(aiPlayer, humanPlayer);
+            FuzzyenemyBehaviorTreeNear.onTreeExecuted += EndTurn;
+        }
+        else
+        {
+            FuzzyenemyBehaviorTreeFar.SetPlayerData(humanPlayer, aiPlayer);
+            FuzzyenemyBehaviorTreeFar.onTreeExecuted += EndTurn;
+            playerController.onActionExecuted += EndTurn;
+        }
     }
 
     public void EvaluateAITree()
@@ -56,18 +71,40 @@ public class NewGame : MonoBehaviour
     {
         if (humanPlayer.CurrentHealth <= 0 || aiPlayer.CurrentHealth <= 0)
         {
-            stateMachine.SetTrigger("EndGame");
+            if (!FightHumanPlayer)
+            {
+                stateMachineAI.SetTrigger("EndGame");
+            }
+            else
+            {
+                stateMachineHuman.SetTrigger("EndGame");
+            }
             uiController.EndGame();
             return;
         }
+        if (!FightHumanPlayer)
+        {
+            FuzzyenemyBehaviorTreeNear.UpdateSprites();
+            FuzzyenemyBehaviorTreeFar.UpdateSprites();
 
-        FuzzyenemyBehaviorTreeNear.UpdateSprites();
-        FuzzyenemyBehaviorTreeFar.UpdateSprites();
+            stateMachineAI.SetTrigger("EndTurn");
+        }
+        else
+        {
+            FuzzyenemyBehaviorTreeNear.UpdateSprites();
 
-        stateMachine.SetTrigger("EndTurn");
+            stateMachineHuman.SetTrigger("EndTurn");
+        }
+
         turn ^= 1;
         uiController.SetTurn(turn);
     }
+
+    public void SetHumanplayer()
+    {
+        FightHumanPlayer = true;
+    }
+
     public void SetFarFuzzy()
     {
         FarFuzzyPlayer = true;

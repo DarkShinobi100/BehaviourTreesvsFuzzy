@@ -102,17 +102,26 @@ public class NewUI : MonoBehaviour
     private bool FuzzyNearAIPlayer;
     [SerializeField]
     private bool FuzzyFarAiPlayer;
-
+    [SerializeField]
+    private bool VsHuman;
+    [SerializeField]
+    private NewPlayer Humanplayer;
 
     private void FixedUpdate()
     {
-        UpdateSliders();
+        if(!VsHuman)
+        {
+            UpdateSliders();
+        }
+        else
+        {
+            UpdateHumanSliders();
+        }
     }
 
     public void EndGame()
     {
         turnText.text = gameOverMessage;
-
         if (NearAIPlayer.CurrentHealth <= 0)
         {
             playerHealthText.text = LoseMessage;
@@ -124,7 +133,8 @@ public class NewUI : MonoBehaviour
             playerHealthText.text = WinMessage;
             enemyHealthText.text = LoseMessage;
             AiFarStateText.text = "";
-        }
+        }      
+        
     }
 
     /* We change the turn message dpending on whose turn it is currently */
@@ -144,8 +154,7 @@ public class NewUI : MonoBehaviour
             enemyHealthText.text = WaitMessage;
 
             FuzzyenemyBehaviorTreeFar.ResetSprites();
-            FuzzyenemyBehaviorTreeNear.UpdateSprites();
-
+            FuzzyenemyBehaviorTreeNear.UpdateSprites();           
         }
         else
         {
@@ -159,18 +168,21 @@ public class NewUI : MonoBehaviour
                 enemyHealthText.text = ActionMessage;
             }
             playerHealthText.text = WaitMessage;
-            FuzzyenemyBehaviorTreeNear.ResetSprites();
+
+            FuzzyenemyBehaviorTreeNear.ResetSprites();            
             FuzzyenemyBehaviorTreeFar.UpdateSprites();
         }
     }
 
     private void UpdateSliders()
     {
-        //Near AI
+
         NearHealth.value = NearAIPlayer.CurrentHealth;
         NearMana.value = NearAIPlayer.CurrentMana;
         NearAttack.value = NearAIPlayer.CurrentAttack;
         NearDefence.value = NearAIPlayer.CurrentDefence;
+
+
         //Far AI
         FarHealth.value = FarAiPlayer.CurrentHealth;
         FarMana.value = FarAiPlayer.CurrentMana;
@@ -210,6 +222,54 @@ public class NewUI : MonoBehaviour
         NearFuzzyAttackZ.value = FuzzyenemyBehaviorTreeNear.BasicFuzzy(NearAIPlayer.CurrentAttack / 15.0f).z;
 
     }
+    private void UpdateHumanSliders()
+    {
+
+        NearHealth.value = Humanplayer.CurrentHealth;
+        NearMana.value = Humanplayer.CurrentMana;
+        NearAttack.value = Humanplayer.CurrentAttack;
+        NearDefence.value = Humanplayer.CurrentDefence;
+
+
+        //Far AI
+        FarHealth.value = FarAiPlayer.CurrentHealth;
+        FarMana.value = FarAiPlayer.CurrentMana;
+        FarAttack.value = FarAiPlayer.CurrentAttack;
+        FarDefence.value = FarAiPlayer.CurrentDefence;
+
+        FarFuzzyHealthX.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentHealth / FarAiPlayer.MaxHealth).x;
+        FarFuzzyHealthY.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentHealth / FarAiPlayer.MaxHealth).y;
+        FarFuzzyHealthZ.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentHealth / FarAiPlayer.MaxHealth).z;
+
+        FarFuzzyManaX.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentMana / FarAiPlayer.MaxMana).x;
+        FarFuzzyManaY.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentMana / FarAiPlayer.MaxMana).y;
+        FarFuzzyManaZ.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentMana / FarAiPlayer.MaxMana).z;
+
+        FarFuzzyDefenceX.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentDefence / 15.0f).x;
+        FarFuzzyDefenceY.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentDefence / 15.0f).y;
+        FarFuzzyDefenceZ.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentDefence / 15.0f).z;
+
+        FarFuzzyAttackX.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentAttack / 15.0f).x;
+        FarFuzzyAttackY.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentAttack / 15.0f).y;
+        FarFuzzyAttackZ.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentAttack / 15.0f).z;
+
+        NearFuzzyHealthX.value = 1.0f; 
+        NearFuzzyHealthY.value = 1.0f; 
+        NearFuzzyHealthZ.value = 1.0f;  
+
+        NearFuzzyManaX.value = 1.0f;
+        NearFuzzyManaY.value = 1.0f;  
+        NearFuzzyManaZ.value = 1.0f;
+
+        NearFuzzyDefenceX.value = 1.0f;
+        NearFuzzyDefenceY.value = 1.0f;
+        NearFuzzyDefenceZ.value = 1.0f;
+
+        NearFuzzyAttackX.value = 1.0f;
+        NearFuzzyAttackY.value = 1.0f;
+        NearFuzzyAttackZ.value = 1.0f;
+
+    }
 
     public void SetFuzzyNear()
     {
@@ -219,5 +279,8 @@ public class NewUI : MonoBehaviour
     {
         FuzzyFarAiPlayer = true;
     }
-
+    public void setHuman()
+    {
+        VsHuman = true;
+    }
 }
