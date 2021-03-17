@@ -25,6 +25,13 @@ public class NewGame : MonoBehaviour
     private NewUI uiController;
     private int turn = 0;
 
+    [SerializeField]
+    private float Neartimer = 0.0f;
+    [SerializeField]
+    private float Fartimer = 0.0f;
+    private float StartTimeNear = 0.0f;
+    private float StartTimeFar = 0.0f;
+
     private void Start()
     {
         if (!FightHumanPlayer)
@@ -44,6 +51,7 @@ public class NewGame : MonoBehaviour
 
     public void EvaluateAITree()
     {
+        StartTimeFar = Time.time;
         if (!FarFuzzyPlayer)
         {
             FuzzyenemyBehaviorTreeFar.Evaluate();
@@ -56,6 +64,7 @@ public class NewGame : MonoBehaviour
 
     public void EvaluateAITree2()
     {
+        StartTimeNear = Time.time;
         if (!NearFuzzyPlayer)
         {
             FuzzyenemyBehaviorTreeNear.Evaluate();
@@ -68,6 +77,8 @@ public class NewGame : MonoBehaviour
 
     private void EndTurn()
     {
+        Neartimer = Time.time - StartTimeNear;
+        Fartimer = Time.time - StartTimeFar;
         if (humanPlayer.CurrentHealth <= 0 || aiPlayer.CurrentHealth <= 0)
         {
             if (!FightHumanPlayer)
