@@ -2,27 +2,24 @@
 using UnityEngine.UI;
 
 public class NewPlayer : MonoBehaviour
-{
+{//animator for the player
     private Animator Self;
 
+    //set stats
     [SerializeField]
     private float maxHealth = 20;
-
     [SerializeField]
     private float currentHealth;
-
     [SerializeField]
     private float maxMana = 20;
 
+    //set currrent stats
     [SerializeField]
     private float currentMana;
-
     [SerializeField]
     private float AttackValue;
-
     [SerializeField]
     private float DefenceValue;
-
     [SerializeField]
     private float MagicAttackValue;
 
@@ -54,6 +51,7 @@ public class NewPlayer : MonoBehaviour
     [SerializeField]
     private Slider MinDefence;
 
+    //bool for if the player can change the values
     private bool UpdateDuring = false;
 
     [Header("Ability Parameters")]
@@ -169,19 +167,19 @@ public class NewPlayer : MonoBehaviour
     }
 
     public void SetUpdateDuring()
-    {
+    {//allow the user to change the threashold values while it runs
         UpdateDuring = true;
     }
 
     public float Heal()
-    {
+    {// heal the "player"
         float healAmount = Random.Range(minHealAmount, maxHealAmount);
         currentHealth += healAmount;
         return currentHealth;
     }
 
     public float Damage(float receivedDamage)
-    {
+    {//recieve damage and reduce defence
         float damageAmount = receivedDamage - DefenceValue;
         DefenceValue--;
         if (DefenceValue < 0)
@@ -203,7 +201,7 @@ public class NewPlayer : MonoBehaviour
     }
 
     public float increaseAttack()
-    {
+    {//increase attack values
         AttackValue += Random.Range(1, 5);
 
         if(AttackValue>15)
@@ -214,7 +212,7 @@ public class NewPlayer : MonoBehaviour
     }
 
     public float increaseDefence()
-    {
+    {//increase defence value
         DefenceValue += Random.Range(1, 5);
         if (DefenceValue > 15)
         {
@@ -224,13 +222,13 @@ public class NewPlayer : MonoBehaviour
     }
 
     public float increaseMagicAttack()
-    {
+    {//increase magic attack values
         MagicAttackValue++;
         return MagicAttackValue;
     }
 
     public float increaseMana()
-    {
+    {//increase the mana
         currentMana += Random.Range(5,10);
         if (currentMana > maxMana)
         {
@@ -240,7 +238,7 @@ public class NewPlayer : MonoBehaviour
     }
 
     public float DecreaseMana(float cost)
-    {
+    {//reduce the mana value
         currentMana = currentMana - cost;
         if(currentMana <0)
         {
@@ -250,7 +248,7 @@ public class NewPlayer : MonoBehaviour
     }
 
     public float DecreaseAttack()
-    {
+    {//decerease the attack values
         --AttackValue;
         if (AttackValue < 0)
         {

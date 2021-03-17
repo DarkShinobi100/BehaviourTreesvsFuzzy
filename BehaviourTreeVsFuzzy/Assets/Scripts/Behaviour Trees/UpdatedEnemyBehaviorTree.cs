@@ -4,19 +4,19 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class UpdatedEnemyBehaviorTree : MonoBehaviour
-{
+{//player data
     private NewPlayer playerData;
     private NewPlayer ownData;
-
     private Animator animator;
+
+    //sound effects and player
     [SerializeField]
     private AudioClip[] SFX = new AudioClip[6];
     private AudioSource audioPlayer;
     [SerializeField]
     private Text StateText;
 
-
-    // Spritees for Visuals
+    // Sprites for Visuals
     //attack buff sequence
     [SerializeField]
     private Image AttackCheckNodeSprite;
@@ -106,7 +106,6 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
             ManaCheckHealthNode,
             HealthCheckNode,
         });
-        //          if cannot afford to heal it will regen mana
 
         //Check low Mana, if its low it will decide to buff
         ManaCheckNode = new ActionNode(CheckMana);
@@ -116,7 +115,6 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
             ManaValueCheckNode,
         });
 
-
         //Check low Defence, if its low it will decide to buff
         DefenceCheckNode = new ActionNode(CanUseMana);
         DefenceValueCheckNode = new ActionNode(CheckDefence);
@@ -125,7 +123,6 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
             DefenceValueCheckNode,
         });
 
-
         //Check low Defence, if its low it will decide to buff
         AttackCheckNode = new ActionNode(CanUseMana);
         AttackValueCheckNode = new ActionNode(CheckAttack);
@@ -133,7 +130,6 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
             AttackCheckNode,
             AttackValueCheckNode,
         });
-
 
         //select the buff
         BuffSelectorNode = new Selector(new List<Node> {
@@ -151,7 +147,6 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
             AttackPlayerNode,
         });
 
-
         //own animator
         //Get the Animator attached to the GameObject you are intending to animate.
         animator = gameObject.GetComponent<Animator>();
@@ -160,12 +155,14 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
         audioPlayer = gameObject.GetComponent<AudioSource>();
     }
 
+    //tell the Ai whose data is whose
     public void SetPlayerData(NewPlayer human, NewPlayer ai)
     {
         playerData = human;
         ownData = ai;
     }
 
+    //use behaviour tree to make decisions
     public void Evaluate()
     {
         rootNode.Evaluate();
@@ -173,10 +170,9 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
     }
 
     private IEnumerator Execute()
-    {
+    {//make a decision for what to do
         Debug.Log("The AI is thinking...");
         yield return new WaitForSeconds(2.5f);
-       // yield return new WaitForEndOfFrame();
         //low health
         if (HealthCheckSequence.nodeState == NodeStates.SUCCESS)
         {
@@ -334,6 +330,7 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
         }
     }
 
+    //Check you have enough Mana to act
     private NodeStates CanUseMana()
     {
         if (ownData.CurrentMana > 5)
@@ -346,6 +343,7 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
         }
     }
 
+    //update the behaviour Tree sprites, Green for success, Red for Failure
     public void UpdateSprites()
     {
         if (rootNode.nodeState == NodeStates.SUCCESS)
@@ -484,7 +482,8 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
         }
 
     }
-
+   
+    //reset behaviour tree nodes back to white
     public void ResetSprites()
     {
         StateText.text = "";
@@ -504,16 +503,19 @@ public class UpdatedEnemyBehaviorTree : MonoBehaviour
         AttackValueCheckNodeSprite.color = new Color(255, 255, 255);
         AttackCheckNodeSprite.color = new Color(255, 255, 255);         
     }
+
+    //set sprite Yellow
     private void SetEvaluating(Image Sprite)
     {
         Sprite.color = new Color(255, 255, 0, 255);
     }
 
+    //set sprite Green
     private void SetSucceeded(Image Sprite)
     {
         Sprite.color = new Color(0, 255, 0, 255); 
     }
-
+    //set sprite Red
     private void SetFailed(Image Sprite)
     {
         Sprite.color = new Color(255, 0, 0, 255);

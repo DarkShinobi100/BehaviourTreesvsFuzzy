@@ -2,13 +2,17 @@
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
+    //player stats
     [SerializeField]
     private NewPlayer ownData;
+    //enemy stats
     [SerializeField]
     private NewPlayer enemyData;
+    //enemy state text for hiding their past action
     [SerializeField]
     private Text EnemyStateText;
 
+    //player buttons
     [Header("Buttons")]
     [SerializeField]
     private Button BuffAttackButton;
@@ -21,6 +25,7 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private Button attackButton;
 
+    //sound effects and player
     [SerializeField]
     private AudioClip[] SFX = new AudioClip[6];
     private AudioSource audioPlayer;
@@ -40,7 +45,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Awake()
-    {
+    {//on game start set up listeners to check for player actions
         BuffAttackButton.onClick.AddListener(BuffAttack);
         BuffDefenceButton.onClick.AddListener(BuffDefence);
         BuffManaButton.onClick.AddListener(BuffMana);
@@ -49,7 +54,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Attack()
-    {
+    {//Attack the enemy
         EnemyStateText.text = "";
         enemyData.Damage(ownData.CurrentAttack);
         ownData.DecreaseAttack();
@@ -62,7 +67,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void Heal()
-    {
+    {//Heal the player
         EnemyStateText.text = "";
         ownData.DecreaseMana(5);
         ownData.Heal();
@@ -76,7 +81,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void BuffDefence()
-    {
+    {//increase the players defence
         EnemyStateText.text = "";
         ownData.DecreaseMana(2);
         ownData.increaseDefence();
@@ -89,7 +94,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void BuffAttack()
-    {
+    {//increase the players attack
         EnemyStateText.text = "";
         ownData.DecreaseMana(2);
         ownData.increaseAttack();
@@ -102,7 +107,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void BuffMana()
-    {
+    {//increase the players mana
         EnemyStateText.text = "";
         ownData.increaseMana();
 
@@ -115,7 +120,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void EndTurn()
-    {
+    {//end turn after player has acted
         if(onActionExecuted != null)
         {
             onActionExecuted();

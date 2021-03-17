@@ -4,21 +4,22 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class FuzzyBehaviourScript : MonoBehaviour
-{
+{//player data
     private NewPlayer playerData;
     private NewPlayer ownData;
     private Animator animator;
 
+    //high speed mode
     [SerializeField]
     bool HighSpeed = false;
+    //sound effects and player
     [SerializeField]
     private AudioClip[] SFX = new AudioClip[6];
     private AudioSource audioPlayer;
     [SerializeField]
     private Text StateText;
 
-
-    // Spritees for Visuals
+    // Sprites for Visuals
     //attack buff sequence
     [SerializeField]
     private Image AttackCheckNodeSprite;
@@ -63,8 +64,6 @@ public class FuzzyBehaviourScript : MonoBehaviour
     [SerializeField]
     private Image rootNodeSprite;
 
-
-
     //layer 3
     //Attack Buff Sequence
     public ActionNode AttackCheckNode;
@@ -99,16 +98,16 @@ public class FuzzyBehaviourScript : MonoBehaviour
 
     public delegate void NodePassed(string trigger);
 
-
+    //Graphs for Fuzzy logic
     public AnimationCurve critical;
     public AnimationCurve hurt;
     public AnimationCurve healthy;
 
+    //Bools for state selection
     private bool HealthRisk = false;
     private bool ManaRisk = false;
     private bool DefenceRisk = false;
     private bool AttackRisk = false;
-
     private bool NoRisk = true;
 
     void Start()
@@ -120,7 +119,6 @@ public class FuzzyBehaviourScript : MonoBehaviour
             ManaCheckHealthNode,
             HealthCheckNode,
         });
-        //          if cannot afford to heal it will regen mana
 
         //Check low Mana, if its low it will decide to buff
         ManaCheckNode = new ActionNode(CheckMana);
@@ -130,7 +128,6 @@ public class FuzzyBehaviourScript : MonoBehaviour
             ManaValueCheckNode,
         });
 
-
         //Check low Defence, if its low it will decide to buff
         DefenceCheckNode = new ActionNode(CanUseMana);
         DefenceValueCheckNode = new ActionNode(CheckDefence);
@@ -139,7 +136,6 @@ public class FuzzyBehaviourScript : MonoBehaviour
             DefenceValueCheckNode,
         });
 
-
         //Check low Defence, if its low it will decide to buff
         AttackCheckNode = new ActionNode(CanUseMana);
         AttackValueCheckNode = new ActionNode(CheckAttack);
@@ -147,7 +143,6 @@ public class FuzzyBehaviourScript : MonoBehaviour
             AttackCheckNode,
             AttackValueCheckNode,
         });
-
 
         //select the buff
         BuffSelectorNode = new Selector(new List<Node> {
@@ -165,7 +160,6 @@ public class FuzzyBehaviourScript : MonoBehaviour
             AttackPlayerNode,
         });
 
-
         //own animator
         //Get the Animator attached to the GameObject you are intending to animate.
         animator = gameObject.GetComponent<Animator>();
@@ -174,12 +168,14 @@ public class FuzzyBehaviourScript : MonoBehaviour
         audioPlayer = gameObject.GetComponent<AudioSource>();
     }
 
+    //tell the Ai whose data is whose
     public void SetPlayerData(NewPlayer human, NewPlayer ai)
     {
         playerData = human;
         ownData = ai;
     }
 
+    //use behaviour tree to make decisions
     public void Evaluate()
     {
         rootNode.Evaluate();
@@ -187,23 +183,25 @@ public class FuzzyBehaviourScript : MonoBehaviour
         
     }
 
+    //use fuzzy to make desicions
     public void FuzzyEvaluate()
     {
+        //wait for fuzzy to find a solution before progressing
        if (RunFuzzy())
-        {
+        {//run the behaviour fuzzy chose
             rootNode.Evaluate();
             StartCoroutine(Execute());
         }
     }
 
     private IEnumerator Execute()
-    {
+    {//make a decision for what to do
         Debug.Log("The AI is thinking...");
-        if (HighSpeed)
+        if (HighSpeed)//if enabled returns as soon as a decision is made
         {
             yield return new WaitForEndOfFrame();
         }
-        else
+        else //wait for 2.5 seconds for animations and sound effects to end
         {
             yield return new WaitForSeconds(2.5f);
         }
@@ -365,6 +363,7 @@ public class FuzzyBehaviourScript : MonoBehaviour
         }
     }
 
+    //Check you have enough Mana to act
     private NodeStates CanUseMana()
     {
         if (ownData.CurrentMana > 5)
@@ -377,6 +376,7 @@ public class FuzzyBehaviourScript : MonoBehaviour
         }
     }
 
+    //update the behaviour Tree sprites, Green for success, Red for Failure
     public void UpdateSprites()
     {
         if (rootNode.nodeState == NodeStates.SUCCESS)
@@ -515,7 +515,7 @@ public class FuzzyBehaviourScript : MonoBehaviour
         }
 
     }
-
+    //reset behaviour tree nodes back to white
     public void ResetSprites()
     {
         StateText.text = "";
@@ -535,41 +535,48 @@ public class FuzzyBehaviourScript : MonoBehaviour
         AttackValueCheckNodeSprite.color = new Color(255, 255, 255);
         AttackCheckNodeSprite.color = new Color(255, 255, 255);
     }
+    //set sprite Yellow
     private void SetEvaluating(Image Sprite)
     {
         Sprite.color = new Color(255, 255, 0, 255);
     }
-
+    
+    //set sprite Green
     private void SetSucceeded(Image Sprite)
     {
         Sprite.color = new Color(0, 255, 0, 255);
     }
 
+    //set sprite Red
     private void SetFailed(Image Sprite)
     {
         Sprite.color = new Color(255, 0, 0, 255);
     }
      
+    //Fuzzy inferince System
     private bool RunFuzzy()
     {      
+        //Fuzzification of current data
         Vector3 FuzzyHealth = BasicFuzzy(ownData.CurrentHealth / ownData.MaxHealth);
         Vector3 FuzzyMana = BasicFuzzy(ownData.CurrentMana / ownData.MaxMana);
         Vector3 FuzzyDefence = BasicFuzzy(ownData.CurrentDefence / 15.0f);
         Vector3 FuzzyAttack = BasicFuzzy(ownData.CurrentAttack / 15.0f);
 
+        //Fuzzification of minimum values
         Vector3 FuzzyMinHealth = BasicFuzzy(ownData.MinimumHealth / ownData.MaxHealth);
         Vector3 FuzzyMinMana = BasicFuzzy(ownData.MinimumMana / ownData.MaxMana);
         Vector3 FuzzyMinDefence = BasicFuzzy(ownData.MinimumDefence / 15.0f);
         Vector3 FuzzyMinAttack = BasicFuzzy(ownData.MinimumAttack / 15.0f);
 
+        //Check if critical value is higher than healthy value
         if (FuzzyHealth.z > FuzzyHealth.x)
-        {
+        {//check if FuzzyHealth is at the greatest risk
             if (FuzzyHealth.z > FuzzyMana.z)
             {
                 if (FuzzyHealth.z > FuzzyDefence.z)
                 {
                     if (FuzzyHealth.z > FuzzyAttack.z)
-                    {
+                    {//check if the current value is as high a risk as the minimum values
                         if (FuzzyHealth.z >= FuzzyMinHealth.z)
                         {
                             Debug.Log("Health Risk");
@@ -584,15 +591,15 @@ public class FuzzyBehaviourScript : MonoBehaviour
                 }
             }
         }
-
+        //Check if critical value is higher than healthy value
         if (FuzzyMana.z > FuzzyMana.x)
-        {
+        {//check if FuzzyHealth is at the greatest risk
             if (FuzzyMana.z > FuzzyHealth.z)
             {
                 if (FuzzyMana.z > FuzzyDefence.z)
                 {
                     if (FuzzyMana.z > FuzzyAttack.z)
-                    {
+                    {//check if the current value is as high a risk as the minimum values
                         if (FuzzyMana.z >= FuzzyMinMana.z)
                         {
                             Debug.Log("Mana Risk");
@@ -607,15 +614,15 @@ public class FuzzyBehaviourScript : MonoBehaviour
                 }
             }
         }
-
+        //Check if critical value is higher than healthy value
         if (FuzzyDefence.z > FuzzyDefence.x)
-        {
+        {//check if FuzzyHealth is at the greatest risk
             if (FuzzyDefence.z > FuzzyHealth.z)
             {
                 if (FuzzyDefence.z > FuzzyMana.z)
                 {
                     if (FuzzyDefence.z > FuzzyAttack.z)
-                    {
+                    {//check if the current value is as high a risk as the minimum values
                         if (FuzzyDefence.z >= FuzzyMinDefence.z)
                         {
                             Debug.Log("Defence Risk");
@@ -630,13 +637,13 @@ public class FuzzyBehaviourScript : MonoBehaviour
                 }
             }
         }
-
+        //Check if critical value is higher than healthy value
         if (FuzzyAttack.z > FuzzyAttack.x)
-        {
+        {//check if FuzzyHealth is at the greatest risk
             if (FuzzyAttack.z > FuzzyHealth.z)
             {
                 if (FuzzyAttack.z > FuzzyMana.z)
-                {
+                {//check if the current value is as high a risk as the minimum values
                     if (FuzzyAttack.z >= FuzzyMinAttack.z)
                     {
                         Debug.Log("Attack Risk");
@@ -651,6 +658,7 @@ public class FuzzyBehaviourScript : MonoBehaviour
             }
         }
 
+        //if nothing is in a critical state, high enough to react to then there is "noRisk"
         HealthRisk = false;
         ManaRisk = false;
         DefenceRisk = false;
@@ -659,12 +667,14 @@ public class FuzzyBehaviourScript : MonoBehaviour
         return true;
     }
 
+    //basic fuzzification function
     public Vector3 BasicFuzzy(float inputValue)
-    {
+    {//compare the normalized input value to the graphs and return the Y value
         float healthyValue = healthy.Evaluate(inputValue);
         float hurtValue = hurt.Evaluate(inputValue);
         float criticalValue = critical.Evaluate(inputValue);
 
+        //return the values for all 3 graphs to use for decisions
         return new Vector3(healthyValue, hurtValue, criticalValue);
     }    
 }

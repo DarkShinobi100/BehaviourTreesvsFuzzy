@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class NewUI : MonoBehaviour
 {
+    //battle messages
     private const string playerTurnMessage = "Your turn";
     private const string aiTurnMessage = "Enemy's turn";
     private const string gameOverMessage = "GAME OVER\n amount of Turns: ";
@@ -11,14 +12,17 @@ public class NewUI : MonoBehaviour
     private const string WaitMessage = "";
     private const string WinMessage = "You win!";
     private const string LoseMessage = "You Lose!";
+    //players
     [SerializeField]
     private NewPlayer NearAIPlayer;
     [SerializeField]
     private NewPlayer FarAiPlayer;
+    //enemy behaviour trees
     [SerializeField]
     private FuzzyBehaviourScript FuzzyenemyBehaviorTreeFar;
     [SerializeField]
     private FuzzyBehaviourScript FuzzyenemyBehaviorTreeNear;
+    //game text
     [SerializeField]
     private Text turnText;
     [SerializeField]
@@ -48,6 +52,7 @@ public class NewUI : MonoBehaviour
     [SerializeField]
     private Slider FarDefence;
 
+    //Fuzzy sliders
     [SerializeField]
     private Slider FarFuzzyHealthX;
     [SerializeField]
@@ -98,23 +103,26 @@ public class NewUI : MonoBehaviour
     [SerializeField]
     private Slider NearFuzzyDefenceZ;
 
+    //toggle for AI players
     [SerializeField]
     private bool FuzzyNearAIPlayer;
     [SerializeField]
     private bool FuzzyFarAiPlayer;
+    //player data
     [SerializeField]
     private bool VsHuman;
     [SerializeField]
     private NewPlayer Humanplayer;
 
+    //player buttons for gameplay
     [SerializeField]
     private GameObject PlayerButtons;
-
     [SerializeField]
     private GameObject QuitButton;
     [SerializeField]
     private GameObject ResetButton;
 
+    //animators
     [SerializeField]
     private Animator NearAnimator;
     [SerializeField]
@@ -123,7 +131,7 @@ public class NewUI : MonoBehaviour
     private int TurnCount = 0;
 
     private void FixedUpdate()
-    {
+    {//update sliders values
         if(!VsHuman)
         {
             UpdateSliders();
@@ -135,13 +143,14 @@ public class NewUI : MonoBehaviour
     }
 
     public void EndGame()
-    {
+    {//end of the game, Display gameover message and options
         turnText.text = gameOverMessage + TurnCount.ToString();
         QuitButton.SetActive(true);
         ResetButton.SetActive(true);
 
+        //Not fighting a player
         if (!VsHuman)
-        {
+        {//left player has died
             if (NearAIPlayer.CurrentHealth <= 0)
             {
                 playerHealthText.text = LoseMessage;
@@ -150,7 +159,7 @@ public class NewUI : MonoBehaviour
                 FarAnimator.SetTrigger("Win");
                 AINearStateText.text = "";
             }
-            else
+            else //right player has died
             {
                 playerHealthText.text = WinMessage;
                 NearAnimator.SetTrigger("Win");
@@ -159,79 +168,81 @@ public class NewUI : MonoBehaviour
                 AiFarStateText.text = "";
             }
         }
-        else
+        else//we are fighting a player
         if (Humanplayer.CurrentHealth <= 0)
-        {
+        {//human has lost the battle
             playerHealthText.text = LoseMessage;
             NearAnimator.SetTrigger("Lose");
             enemyHealthText.text = WinMessage;
             FarAnimator.SetTrigger("Win");
             AINearStateText.text = "";
         }
-        else
+        else//Ai has lost
         {
             playerHealthText.text = WinMessage;
             NearAnimator.SetTrigger("Win");
             enemyHealthText.text = LoseMessage;
             FarAnimator.SetTrigger("Lose");
             AiFarStateText.text = "";
-        }    
-        
+        }            
     }
 
-    /* We change the turn message dpending on whose turn it is currently */
+    // Change turn message based on whose acting
     public void SetTurn(int turnNumber)
-    {
+    {//increase turn count
         TurnCount++;
+        //left player turn
         if (turnNumber == 0)
         {
+            //if its a fuzzy AI, use new message
             if (FuzzyNearAIPlayer)
             {
                 playerHealthText.text = FuzzyMessage;
             }
             else
-            {
+            {//use default message
                 playerHealthText.text = ActionMessage;
             }
             turnText.text = playerTurnMessage;
             enemyHealthText.text = WaitMessage;
 
 
-            if(!VsHuman)
-            {
+            if(!VsHuman)//not a human playing
+            {//reset the sprites for the tree
                 FuzzyenemyBehaviorTreeFar.ResetSprites();
                 FuzzyenemyBehaviorTreeNear.UpdateSprites();
             }    
             else
-            {
+            {//enable the players buttons
                 PlayerButtons.SetActive(true);
             }
         }
         else
-        {
+        {//Right player turn
             turnText.text = aiTurnMessage;
+            //if its a fuzzy AI, use new message
             if (FuzzyFarAiPlayer)
             {
                 enemyHealthText.text = FuzzyMessage;
             }
             else
-            {
+            {//use default message
                 enemyHealthText.text = ActionMessage;
             }
             playerHealthText.text = WaitMessage;
 
-            if(!VsHuman)
-            {
+            if(!VsHuman)//not a human playing
+            {//reset the sprites for the tree
                 FuzzyenemyBehaviorTreeNear.ResetSprites();
             }
             else
-            {
+            {//disable the players buttons
                 PlayerButtons.SetActive(false);
             }
             FuzzyenemyBehaviorTreeFar.UpdateSprites();
         }
         if(VsHuman)
-        {
+        {//if human playing disable the text
             playerHealthText.text = WaitMessage;
             enemyHealthText.text = WaitMessage;
         }
@@ -239,19 +250,19 @@ public class NewUI : MonoBehaviour
 
     private void UpdateSliders()
     {
-
+        //update sliders values for left player
         NearHealth.value = NearAIPlayer.CurrentHealth;
         NearMana.value = NearAIPlayer.CurrentMana;
         NearAttack.value = NearAIPlayer.CurrentAttack;
         NearDefence.value = NearAIPlayer.CurrentDefence;
 
-
-        //Far AI
+        //update sliders values for right player
         FarHealth.value = FarAiPlayer.CurrentHealth;
         FarMana.value = FarAiPlayer.CurrentMana;
         FarAttack.value = FarAiPlayer.CurrentAttack;
         FarDefence.value = FarAiPlayer.CurrentDefence;
 
+        //Fuzzy values for Right AI
         FarFuzzyHealthX.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentHealth / FarAiPlayer.MaxHealth).x;
         FarFuzzyHealthY.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentHealth / FarAiPlayer.MaxHealth).y;
         FarFuzzyHealthZ.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentHealth / FarAiPlayer.MaxHealth).z;
@@ -268,6 +279,7 @@ public class NewUI : MonoBehaviour
         FarFuzzyAttackY.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentAttack / 15.0f).y;
         FarFuzzyAttackZ.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentAttack / 15.0f).z;
 
+        //Fuzzy values for left AI
         NearFuzzyHealthX.value = FuzzyenemyBehaviorTreeNear.BasicFuzzy(NearAIPlayer.CurrentHealth / NearAIPlayer.MaxHealth).x;
         NearFuzzyHealthY.value = FuzzyenemyBehaviorTreeNear.BasicFuzzy(NearAIPlayer.CurrentHealth / NearAIPlayer.MaxHealth).y;
         NearFuzzyHealthZ.value = FuzzyenemyBehaviorTreeNear.BasicFuzzy(NearAIPlayer.CurrentHealth / NearAIPlayer.MaxHealth).z;
@@ -287,19 +299,19 @@ public class NewUI : MonoBehaviour
     }
     private void UpdateHumanSliders()
     {
-
+        //update sliders values for left player
         NearHealth.value = Humanplayer.CurrentHealth;
         NearMana.value = Humanplayer.CurrentMana;
         NearAttack.value = Humanplayer.CurrentAttack;
         NearDefence.value = Humanplayer.CurrentDefence;
-
-
-        //Far AI
+        
+        //update sliders values for right player
         FarHealth.value = FarAiPlayer.CurrentHealth;
         FarMana.value = FarAiPlayer.CurrentMana;
         FarAttack.value = FarAiPlayer.CurrentAttack;
         FarDefence.value = FarAiPlayer.CurrentDefence;
 
+        //Fuzzy values for Right AI
         FarFuzzyHealthX.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentHealth / FarAiPlayer.MaxHealth).x;
         FarFuzzyHealthY.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentHealth / FarAiPlayer.MaxHealth).y;
         FarFuzzyHealthZ.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentHealth / FarAiPlayer.MaxHealth).z;
@@ -316,6 +328,7 @@ public class NewUI : MonoBehaviour
         FarFuzzyAttackY.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentAttack / 15.0f).y;
         FarFuzzyAttackZ.value = FuzzyenemyBehaviorTreeFar.BasicFuzzy(FarAiPlayer.CurrentAttack / 15.0f).z;
 
+        //Fuzzy values for player
         NearFuzzyHealthX.value = 1.0f; 
         NearFuzzyHealthY.value = 1.0f; 
         NearFuzzyHealthZ.value = 1.0f;  
@@ -333,15 +346,17 @@ public class NewUI : MonoBehaviour
         NearFuzzyAttackZ.value = 1.0f;
 
     }
-
+    //sets if near AI is fuzzy
     public void SetFuzzyNear()
     {
         FuzzyNearAIPlayer = true;
     }
+    //sets if far AI is fuzzy
     public void SetFuzzyFar()
     {
         FuzzyFarAiPlayer = true;
     }
+    //set if human playing
     public void setHuman()
     {
         VsHuman = true;

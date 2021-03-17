@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public class EnemyTurnState2 : StateMachineBehaviour
-{
+{//enemy number to control which logic to run
     [SerializeField]
     private string EnemyNumber;
     [SerializeField]
@@ -17,39 +17,24 @@ public class EnemyTurnState2 : StateMachineBehaviour
             animator.SetTrigger("EndTurn");
         }
         else
-        {
+        {//print out that it is starting its turn
             Debug.Log("********************* \n Strating the" + EnemyNumber + " enemy's turn!");
             if (AINumber == 1)
-            {
+            {//call the decision tree for the AI
                 animator.gameObject.GetComponent<NewGame>().EvaluateAITree();
             }
             else
-            {
+            {//call the decision tree for AI
                 animator.gameObject.GetComponent<NewGame>().EvaluateAITree2();
             }
         }
         
     }
 
-    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-    //
-    //}
-
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         Debug.Log("Ending the " + EnemyNumber + " enemy's turn. \n *********************");
 
-    }
-
-    // OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here
-    //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-    //
-    //}
-
-    // OnStateIK is called right after Animator.OnAnimatorIK(). Code that sets up animation IK (inverse kinematics) should be implemented here.
-    //override public void OnStateIK(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-    //
-    //}
+    }    
 }
