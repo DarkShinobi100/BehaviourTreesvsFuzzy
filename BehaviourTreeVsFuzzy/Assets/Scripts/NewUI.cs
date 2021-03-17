@@ -5,7 +5,7 @@ public class NewUI : MonoBehaviour
 {
     private const string playerTurnMessage = "Your turn";
     private const string aiTurnMessage = "Enemy's turn";
-    private const string gameOverMessage = "GAME OVER";
+    private const string gameOverMessage = "GAME OVER\n amount of Turns: ";
     private const string ActionMessage = "New behaviour";
     private const string FuzzyMessage = "New Fuzzy behaviour";
     private const string WaitMessage = "";
@@ -115,6 +115,13 @@ public class NewUI : MonoBehaviour
     [SerializeField]
     private GameObject ResetButton;
 
+    [SerializeField]
+    private Animator NearAnimator;
+    [SerializeField]
+    private Animator FarAnimator;
+
+    private int TurnCount = 0;
+
     private void FixedUpdate()
     {
         if(!VsHuman)
@@ -129,7 +136,7 @@ public class NewUI : MonoBehaviour
 
     public void EndGame()
     {
-        turnText.text = gameOverMessage;
+        turnText.text = gameOverMessage + TurnCount.ToString();
         QuitButton.SetActive(true);
         ResetButton.SetActive(true);
 
@@ -138,13 +145,17 @@ public class NewUI : MonoBehaviour
             if (NearAIPlayer.CurrentHealth <= 0)
             {
                 playerHealthText.text = LoseMessage;
+                NearAnimator.SetTrigger("Lose");
                 enemyHealthText.text = WinMessage;
+                FarAnimator.SetTrigger("Win");
                 AINearStateText.text = "";
             }
             else
             {
                 playerHealthText.text = WinMessage;
+                NearAnimator.SetTrigger("Win");
                 enemyHealthText.text = LoseMessage;
+                FarAnimator.SetTrigger("Lose");
                 AiFarStateText.text = "";
             }
         }
@@ -152,13 +163,17 @@ public class NewUI : MonoBehaviour
         if (Humanplayer.CurrentHealth <= 0)
         {
             playerHealthText.text = LoseMessage;
+            NearAnimator.SetTrigger("Lose");
             enemyHealthText.text = WinMessage;
+            FarAnimator.SetTrigger("Win");
             AINearStateText.text = "";
         }
         else
         {
             playerHealthText.text = WinMessage;
+            NearAnimator.SetTrigger("Win");
             enemyHealthText.text = LoseMessage;
+            FarAnimator.SetTrigger("Lose");
             AiFarStateText.text = "";
         }    
         
@@ -167,6 +182,7 @@ public class NewUI : MonoBehaviour
     /* We change the turn message dpending on whose turn it is currently */
     public void SetTurn(int turnNumber)
     {
+        TurnCount++;
         if (turnNumber == 0)
         {
             if (FuzzyNearAIPlayer)
