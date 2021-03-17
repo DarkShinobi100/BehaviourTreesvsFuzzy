@@ -2,10 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
-//university Library
-using FLS;
-using FLS.Rules;
-using FLS.MembershipFunctions;
 
 public class FuzzyBehaviourScript : MonoBehaviour
 {
